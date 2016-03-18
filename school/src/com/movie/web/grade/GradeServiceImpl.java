@@ -1,11 +1,15 @@
 package com.movie.web.grade;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Vector;
 
 public class GradeServiceImpl implements GradeService{
 	// 멤버 필드 (속성을 모아놓은 부분)
 	Vector<GradeBean> gradeList; // 메소드들이 공유를 해야해서 멤버 필드 영역에 선언해야 한다. (인스턴스 변수라 한다) , 인스턴스 변수 멤버 필드 영역에서 초기화를 하지 않는다. 따라서 아래 생성자와 같이 메소드에서 초기화해주는게 좋다!
 	GradeBean grade;
+	GradeDAO dao = new GradeDAOImpl();
+	ArrayList<MemberGradeBean>  mgList;
 	public GradeServiceImpl() {
 		gradeList = new Vector<GradeBean>(); // 초기화
 	}
@@ -18,33 +22,44 @@ public class GradeServiceImpl implements GradeService{
 	}
 
 	@Override
-	public Vector<GradeBean> getList() { // 서비스에서 syso를 하는게 아니라 Controller로 gradeList를 던져주면 된다!
+	public ArrayList<MemberGradeBean> getList() { // 서비스에서 syso를 하는게 아니라 Controller로 gradeList를 던져주면 된다!
 		// R 성적표 리스트 출력
-		return gradeList;
+		mgList = dao.selectAll();
+		return mgList;
 	}
 
 	@Override
-	public GradeBean getGradeByHak(int hak) {
+	public MemberGradeBean getGradeByHak(int hak) {
 		// R 성적표 조회(학번)
-		for (GradeBean temp : gradeList) {
+		return dao.selectGradeByHak(hak);
+		
+		/*for (GradeBean temp : gradeList) {
 			if (temp.getHak() == hak) {
 				return temp;
 			}
 		}
-		return null;
+		return null;*/
 	}
 
 	@Override
-	public Vector<GradeBean> getGradesByName(String name) {
-		// R 성적표 조회(이름)
-		Vector<GradeBean> tmpVec = new Vector<GradeBean>();
+	public Vector<MemberGradeBean> getGradesById(String name) {
+		// R 성적표 조회(아이디)
+		Vector<MemberGradeBean> memGra = dao.selectGradesById(name);
+		
+		return memGra;
+		
+	/*	Vector<GradeBean> tmpVec = new Vector<GradeBean>();
+		
+		//grade = dao.selectGrade(id); //데이터베이스에서 성적을 조회해서 가져온다.
 		
 		for (GradeBean temp : gradeList) {
-			if (temp.getName().equals(name)) {
+			if (temp.getId().equals(name)) {
 				tmpVec.add(temp); // 매개변수로 넘어온 name 값을 가진 GradeBean객체를 tmpVec벡터에 저장한다.
 			}
 		}
-		return tmpVec;
+		
+		tmpVec.add(grade);
+		return tmpVec;*/
 	}
 
 	@Override
@@ -56,6 +71,7 @@ public class GradeServiceImpl implements GradeService{
 	@Override
 	public String update(GradeBean grade) {
 		// U 성적표 수정
+		
 		/*for (int i = 0; i < gradeList.size(); i++) {
 			if (gradeList.get(i).getHak() == grade.getHak()) {
 				gradeList.get(i).setJava(grade.getJava());

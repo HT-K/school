@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 import com.movie.web.global.Constants;
 
-public class MemberDAOIMpl implements MemberDAO {
+public class MemberDAOImpl implements MemberDAO {
 	private Connection conn;
 	private Statement stmt;
 	private PreparedStatement pstmt;

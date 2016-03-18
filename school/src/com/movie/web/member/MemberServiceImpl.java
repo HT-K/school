@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 public class MemberServiceImpl implements MemberService {
 	HashMap<String, MemberBean> map;
-	MemberDAO dao = new MemberDAOIMpl(); // MemberDAO 인터페이스를 구현한 MemberDAOImpl 객체 생성
+	MemberDAO dao = new MemberDAOImpl(); // MemberDAO 인터페이스를 구현한 MemberDAOImpl 객체 생성
 	
 	public MemberServiceImpl() {
 		map = new HashMap<String, MemberBean>();

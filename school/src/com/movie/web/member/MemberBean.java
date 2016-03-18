@@ -50,7 +50,4 @@ public class MemberBean {
 		return "회원정보 [아이디=" + id + ", 비밀번호=" + password + ", 이름=" + name + ", 주소=" + addr + ", 생년월일="
 				+ birth + "]";
 	}
-
-	
-	
 }
