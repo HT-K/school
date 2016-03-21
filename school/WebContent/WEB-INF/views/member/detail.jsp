@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div>
-		<table>
+		<table border="1">
 			<tr>
 				<td rowspan="4"></td>
 				<td>

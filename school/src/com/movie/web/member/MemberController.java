@@ -27,7 +27,6 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 		switch (action) {
 			case "login_form" : 
 				break;
-			
 			case "join_form" :
 				break;
 			case "login" :
