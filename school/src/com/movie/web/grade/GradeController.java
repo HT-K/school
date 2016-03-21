@@ -1,5 +1,6 @@
 package com.movie.web.grade;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Vector;
@@ -8,6 +9,7 @@ public class GradeController {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		GradeService service = new GradeServiceImpl(); // 기차역 같은 존재, 한개만 생성되어 가져다 쓰면 된다.
+		ArrayList<MemberGradeBean> tmpList = new ArrayList<MemberGradeBean>();
 		
 		while (true) {
 			System.out.println("[메뉴] 1.등록 2.수정 3.삭제 4.조회(전체) 5.조회(이름) 6.조회(학번) 7.회원수 0.종료");
@@ -33,9 +35,9 @@ public class GradeController {
 			case 5:
 				System.out.println("조회할 이름 입력");
 				//Vector<GradeBean> gradeVec = service.getGradesById(scanner.next());
-				Vector<MemberGradeBean> memGra = service.getGradesById(scanner.next());
+				tmpList = service.getGradesById(scanner.next());
 				
-				System.out.println(memGra);
+				System.out.println(tmpList);
 				/*if (gradeVec.size() == 0) { // 리턴 받은 벡터 객체의 사이즈가 0이면 성적 객체를 아무것도 저장하지 못했다는 뜻이다.
 					System.out.println("입력한 이름의 학생이 없습니다.");
 				} else {

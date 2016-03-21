@@ -22,4 +22,7 @@ SELECT * FROM v_Member_Grade;
 SELECT * FROM v_Member_Grade
 WHERE name = '김유신';
 -----------------------------------------------------
-DROP VIEW v_Member_Grade;
+DROP VIEW v_Member_Grade; <!-- 뷰 제거 명령어 -->
+-----------------------------------------------------
+SELECT COUNT(*) AS count -- 열의 수 구하는 방법, 결과 값을 count 컬럼에다 바로 넣는다.(int 값으로 들어간다) 
+FROM v_Member_Grade;

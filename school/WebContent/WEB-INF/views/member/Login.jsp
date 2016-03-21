@@ -6,6 +6,8 @@
 	<title>로그인 폼</title>
 </head>
 <body>
-	
+	<div>
+		<h2>로그인 화면에 들어옴</h2>
+	</div>
 </body>
 </html>

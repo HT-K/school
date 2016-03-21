@@ -21,8 +21,29 @@ public class GradeDAOImpl implements GradeDAO{
 	
 	@Override
 	public void insert(GradeBean gradeBean) {
-		// TODO Auto-generated method stub
+		String id = gradeBean.getId();
+		int hak = gradeBean.getHak();
+		int java = gradeBean.getJava();
+		int sql = gradeBean.getSql();
+		int jsp = gradeBean.getJsp();
+		int spring = gradeBean.getSpring();
 		
+		String query = "INSERT INTO Grade VALUES (?,?,?,?,?,?)";
+		try {
+			Class.forName(Constants.ORACLE_DRIVER);
+			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, hak);
+			pstmt.setInt(3, java);
+			pstmt.setInt(4, sql);
+			pstmt.setInt(5, jsp);
+			pstmt.setInt(6, spring);
+			pstmt.executeQuery();
+		} catch (Exception e) {
+			System.out.println("insert()에서 에러 발생");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -85,8 +106,8 @@ public class GradeDAOImpl implements GradeDAO{
 	}
 
 	@Override
-	public Vector<MemberGradeBean> selectGradesById(String name) {
-		Vector<MemberGradeBean> memGreVec = new Vector<MemberGradeBean>();
+	public ArrayList<MemberGradeBean> selectGradesById(String name) {
+		ArrayList<MemberGradeBean> tmpList = new ArrayList<MemberGradeBean>();
 		
 		try {
 			Class.forName(Constants.ORACLE_DRIVER);
@@ -95,31 +116,54 @@ public class GradeDAOImpl implements GradeDAO{
 			rs = stmt.executeQuery("SELECT * FROM v_Member_Grade WHERE name =" + "'"+name+"'");
 
 			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
-				MemberGradeBean memGre = new MemberGradeBean(); // 중복된 이름이 있다면 각각의 객체에 담기게 하기 위해 지역변수로 객체를 생성해둔다.
+				MemberGradeBean tmpBean = new MemberGradeBean(); // 중복된 이름이 있다면 각각의 객체에 담기게 하기 위해 지역변수로 객체를 생성해둔다.
 				
-				memGre.setId(rs.getString("id"));
-				memGre.setName(rs.getString("name"));
-				memGre.setPassword(rs.getString("password"));
-				memGre.setAddr(rs.getString("addr"));
-				memGre.setBirth(rs.getInt("birth"));
-				memGre.setHak(rs.getInt("hak"));
-				memGre.setJava(rs.getInt("java"));
-				memGre.setSql(rs.getInt("sql"));
-				memGre.setJsp(rs.getInt("jsp"));
-				memGre.setSpring(rs.getInt("spring"));
-				memGreVec.add(memGre);
+				tmpBean.setId(rs.getString("id"));
+				tmpBean.setName(rs.getString("name"));
+				tmpBean.setPassword(rs.getString("password"));
+				tmpBean.setAddr(rs.getString("addr"));
+				tmpBean.setBirth(rs.getInt("birth"));
+				tmpBean.setHak(rs.getInt("hak"));
+				tmpBean.setJava(rs.getInt("java"));
+				tmpBean.setSql(rs.getInt("sql"));
+				tmpBean.setJsp(rs.getInt("jsp"));
+				tmpBean.setSpring(rs.getInt("spring"));
+				tmpList.add(tmpBean);
 			}
 		} catch (Exception e) {
 			System.out.println("selectMember()에서 에러 발생");
 			e.printStackTrace();
 		}
-		return memGreVec;
+		return tmpList;
 	}
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		String sql = "SELECT COUNT(*) AS count FROM v_Member_Grade";
+		try {
+			Class.forName(Constants.ORACLE_DRIVER);
+			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) { //방법 1
+				count = rs.getInt("count");
+			}
+			
+			/*rs = stmt.executeQuery(sql); // 방법2
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}*/
+			
+			/*rs.last(); // 방법 3, 이게 성능 상 가장 좋다.
+			count = rs.getRow();*/
+			
+		} catch (Exception e) {
+			System.out.println("insert()에서 에러 발생");
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 	@Override
