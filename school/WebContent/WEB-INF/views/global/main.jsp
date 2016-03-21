@@ -3,14 +3,12 @@
 <c:set var="context" value="<%=request.getContextPath()%>"></c:set>
 
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>메인 화면</title>
+	<title>메인</title>
 </head>
 <body>
-	<body>
-	<a href="${context}/member/login_form.do">로그인 화면 이동</a> <!-- 이 전체를 url이라고 하고 /member/Login_form.do는 uri라고 한다.  -->
-</body>
+	<h1>메인입니다.</h1>
 </body>
 </html>
