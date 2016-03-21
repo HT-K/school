@@ -53,9 +53,12 @@
 			</table>
 			<div>
 				<input type="submit" value="가입완료" /> 
-				<input type="reset" value="가입취소" />
+				<input type="reset" value="취소" />
 			</div>
 		</form>
+		<form action="${context}/global/main.do">
+		<input type="submit" value="홈으로" />
+	</form>
 	</div>
 </body>
 </html>

@@ -9,6 +9,10 @@
 	<title>메인</title>
 </head>
 <body>
-	<h1>메인입니다.</h1>
+	메인 홈 <br />
+	<a href="${context}/member/login_form.do"> 로그인 화면 이동</a>
+	<div><h4>아이디가 없으면, 계정을 생성하시오</h4>
+		<a href="${context}/member/join_form.do">회원가입</a>
+	</div>
 </body>
 </html>
