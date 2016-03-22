@@ -106,7 +106,7 @@ public class GradeDAOImpl implements GradeDAO{
 	}
 
 	@Override
-	public ArrayList<MemberGradeBean> selectGradesById(String name) {
+	public ArrayList<MemberGradeBean> selectGradesByName(String name) {
 		ArrayList<MemberGradeBean> tmpList = new ArrayList<MemberGradeBean>();
 		
 		try {
@@ -136,6 +136,32 @@ public class GradeDAOImpl implements GradeDAO{
 		}
 		return tmpList;
 	}
+	
+	@Override
+	public GradeBean selectGradesById(String id) {
+		GradeBean grade = new GradeBean();
+		
+		try {
+			Class.forName(Constants.ORACLE_DRIVER);
+			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM Grade WHERE id =" + "'"+id+"'");
+
+			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
+				grade.setId(rs.getString("id"));
+				grade.setHak(rs.getInt("hak"));
+				grade.setJava(rs.getInt("java"));
+				grade.setSql(rs.getInt("sql"));
+				grade.setJsp(rs.getInt("jsp"));
+				grade.setSpring(rs.getInt("spring"));
+			}
+		} catch (Exception e) {
+			System.out.println("selectGradesById()에서 에러 발생");
+			e.printStackTrace();
+		}
+		return grade;
+	}
+	
 
 	@Override
 	public int count() {

@@ -49,7 +49,7 @@ public class MemberDAOImpl implements MemberDAO {
 			System.out.println("selectMember()에서 에러 발생");
 			e.printStackTrace();
 		}
-		System.out.println("쿼리 조회 결과 :" + temp.getAddr());
+		//System.out.println("쿼리 조회 결과 :" + temp.getAddr());
 		
 		return temp;
 	}
@@ -64,5 +64,25 @@ public class MemberDAOImpl implements MemberDAO {
 	public void delete(String id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean isMember(String id) {
+		try {
+			Class.forName(Constants.ORACLE_DRIVER);
+			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT id FROM Member");
+
+			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
+				if (id.equals(rs.getString("id"))) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("isMember()에서 에러 발생");
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

@@ -1,54 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../global/header.jsp" />
-<div class="mg_auto" style="width: 1000px;">
-	<h1>회원 가입 폼</h1>
-	<div>
-		<form action="${context}/global/main.do" method="get">
-			<table>
-				<tr>
-					<td>
-						<h3>아이디</h3>
-					</td>
-					<td><input type="text" name="id" value=""
-						autofocus="autofocus" required="required" /></td>
-				</tr>
-				<tr>
-					<td>
-						<h3>비밀번호</h3>
-					</td>
-					<td><input type="password" required="required" /></td>
-				</tr>
-				<tr>
-					<td>
-						<h3>비밀번호 확인</h3>
-					</td>
-					<td><input type="password" /></td>
-				</tr>
-				<tr>
-					<td>
-						<h3>이름</h3>
-					</td>
-					<td><input type="text" /></td>
-				</tr>
-				<tr>
-					<td>
-						<h3>주소</h3>
-					</td>
-					<td><input type="text" /></td>
-				</tr>
-				<tr>
-					<td>
-						<h3>생일</h3>
-					</td>
-					<td><input type="text" /></td>
-				</tr>
-			</table>
-			<div>
-				<input type="submit" value="가입완료" /> <input type="reset" value="취소" />
-				<a href="${context}/global/main.do">홈으로</a>
-			</div>
-		</form>
-
+<jsp:include page="../global/header.jsp"/>
+<div id="join">
+		<div class="joinTop">
+			<h2 class="text-center">회원가입</h2>
+		</div>
+		<div class="joinCenter row">
+			<form action="${context}/member/join" method="post" name="joinForm" class="form-horizontal">
+				<fieldset class="joinField">
+					<div class="form-group">
+					 	<label for="input_id" class="col-sm-4 control-label">아이디</label>
+					 	<div class="col-sm-4">
+							<input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="input_pw" class="col-sm-4 control-label">비밀번호</label>
+					 	<div class="col-sm-4">
+							<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="input_pw_check" class="col-sm-4 control-label">비밀번호 확인</label>
+						<div class="col-sm-4">
+							<input type="password" class="form-control" name="passwordCheck" id="passwordCheck" placeholder="비밀번호를 확인하세요"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="input_name" class="col-sm-4 control-label">이름</label>
+					 	<div class="col-sm-4">
+							<input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="input_name" class="col-sm-4 control-label">주소</label>
+					 	<div class="col-sm-4">
+							<input type="text" class="form-control" id="addr" name="addr" placeholder="주소를 입력하세요"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="input_name" class="col-sm-4 control-label">생년월일</label>
+					 	<div class="col-sm-4">
+							<input type="date" class="form-control" id="birth" name="birth" placeholder="생년월일을 입력하세요"/>
+						</div>
+					</div>
+					<div class="input_button text-center">
+						<input type="submit" id="joinButton" class="btn btn-primary" value ="회원가입"/>
+						<input type="reset" id="cancleButton" class="btn btn-primary" value ="취소"/>
+					</div>
+						
+				</fieldset>
+			</form>
+		</div>
 	</div>
-</div>
-<jsp:include page="../global/footer.jsp" />

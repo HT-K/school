@@ -18,18 +18,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberBean login(String id, String password) throws Exception{
+	public MemberBean login(String id, String password) {
 		// 로그인
 		// 아이디가 존재하지 않아서 실패한 경우와 비번이 틀려서 실패한 경우에 따라서 메시지를 전달해줘야함
-		MemberBean member = map.get(id); // key값인 id 값에 맞는 value값(MemberBean객체)을 저장한다.
+		MemberBean member = new MemberBean();
 		
-		if (member == null) {
-			throw new Exception("아이디가 틀렸습니다.");
+		if (!dao.isMember(id)) { //id가 없는 경우
+			return null;
 		}
-		if (!(member.getPassword().equals(password))) {
-			throw new Exception("비밀번호가 틀렸습니다.");
+		
+		// id가 db에 있는 경우
+		member = dao.selectMember(id); // 해당 id를 가진 사용자의 모든 정보를 가져와서 bean 객체에 넣는다.
+		if (member.getPassword().equals(password)) { // 비밀번호 확인
+			return member; // id도 있고 비번이 같은 경우
+		} else {
+			return null;
 		}
-		return member;
 	}
 		
 	
@@ -53,5 +57,10 @@ public class MemberServiceImpl implements MemberService {
 		
 		MemberBean member = map.remove(id);
 		return member;
+	}
+
+	@Override
+	public boolean isMember(String id) {
+		return dao.isMember(id);
 	}
 }

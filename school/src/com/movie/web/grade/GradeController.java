@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.movie.web.global.Command;
 import com.movie.web.global.CommandFactory;
+import com.movie.web.member.MemberBean;
+import com.movie.web.member.MemberService;
+import com.movie.web.member.MemberServiceImpl;
 
 /**
  * Servlet implementation class GradeController
@@ -23,9 +26,14 @@ public class GradeController extends HttpServlet {
 		Command command = CommandFactory.getCommand(request, response);
 		String action = command.getAction();
 		
+		GradeService service = new GradeServiceImpl();
+		GradeBean grade = new GradeBean();
+		
 		switch (action) {
 		case "my_grade":
-				command.setView(command.getDirectory(), "my_grade");
+			grade = service.getGradesById(request.getParameter("id")); // detail.jsp 에서 my_grade.do 를 호출할 떄 id 값이 같이 넘어온다.
+			request.setAttribute("score", grade); // id를 이용하여 데이터베이스에서 성적을 담아서 온 GradeBean객체를 score라는 이름으로 참조할 수 있도록 request 객체에 담는다.
+			command.setView(command.getDirectory(), "my_grade");
 			break;
 
 		default:

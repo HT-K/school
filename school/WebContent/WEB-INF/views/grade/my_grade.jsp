@@ -9,19 +9,19 @@
 			</tr>
 			<tr>
 				<td><h3>java</h3></td>
-				<td></td>
+				<td><input type="text" value="${score.java}"/></td>
 			</tr>
 			<tr>
 				<td><h3>jsp</h3></td>
-				<td></td>
+				<td><input type="text" value="${score.jsp}"/></td>
 			</tr>
 			<tr>
 				<td><h3>spring</h3></td>
-				<td></td>
+				<td><input type="text" value="${score.spring}"/></td>
 			</tr>
 			<tr>
 				<td><h3>sql</h3></td>
-				<td></td>
+				<td><input type="text" value="${score.sql}"/></td>
 			</tr>
 		</table>
 		<br>

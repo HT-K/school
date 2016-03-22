@@ -35,9 +35,9 @@ public class GradeServiceImpl implements GradeService{
 	}
 
 	@Override
-	public ArrayList<MemberGradeBean> getGradesById(String name) {
+	public ArrayList<MemberGradeBean> getGradesByName(String name) {
 		// R 성적표 조회(아이디)
-		ArrayList<MemberGradeBean> tmpList = dao.selectGradesById(name);
+		ArrayList<MemberGradeBean> tmpList = dao.selectGradesByName(name);
 		
 		return tmpList;
 		
@@ -51,6 +51,11 @@ public class GradeServiceImpl implements GradeService{
 		
 		tmpVec.add(grade);
 		return tmpVec;*/
+	}
+	
+	@Override
+	public GradeBean getGradesById(String id) {
+		return dao.selectGradesById(id);
 	}
 
 	@Override
@@ -110,5 +115,4 @@ public class GradeServiceImpl implements GradeService{
 		}*/
 		return "삭제실패";
 	}
-
 }
