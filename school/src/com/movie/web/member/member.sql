@@ -25,3 +25,6 @@ VALUES ('kim2','김유신','1','LA',850510);
 SELECT * FROM Member;
 
 SELECT * FROM Member WHERE id = 'kim';
+
+SELECT * FROM Member
+WHERE id = 'kim' and password = '1';

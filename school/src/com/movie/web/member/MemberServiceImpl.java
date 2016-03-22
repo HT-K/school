@@ -14,7 +14,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void join(MemberBean member) {
 		// 회원가입
-		map.put(member.getId(), member); // 키 값으로 id Value로 member객체를 넣는다.
+		dao.insert(member); // 입력받은 회원양식의 값들을 MemberBean 객체인 member에 set 한 후 이곳으로 가져와서 다시 dao에 넘긴다.
 	}
 
 	@Override
@@ -23,9 +23,9 @@ public class MemberServiceImpl implements MemberService {
 		// 아이디가 존재하지 않아서 실패한 경우와 비번이 틀려서 실패한 경우에 따라서 메시지를 전달해줘야함
 		MemberBean member = new MemberBean();
 		
-		if (!dao.isMember(id)) { //id가 없는 경우
+/*		if (!dao.isMember(id)) { //id가 없는 경우
 			return null;
-		}
+		}*/
 		
 		// id가 db에 있는 경우
 		member = dao.selectMember(id); // 해당 id를 가진 사용자의 모든 정보를 가져와서 bean 객체에 넣는다.

@@ -5,7 +5,7 @@
 			<h2 class="text-center">회원가입</h2>
 		</div>
 		<div class="joinCenter row">
-			<form action="${context}/member/join" method="post" name="joinForm" class="form-horizontal">
+			<form action="${context}/member/join.do" method="get" name="joinForm" class="form-horizontal">
 				<fieldset class="joinField">
 					<div class="form-group">
 					 	<label for="input_id" class="col-sm-4 control-label">아이디</label>
@@ -47,7 +47,6 @@
 						<input type="submit" id="joinButton" class="btn btn-primary" value ="회원가입"/>
 						<input type="reset" id="cancleButton" class="btn btn-primary" value ="취소"/>
 					</div>
-						
 				</fieldset>
 			</form>
 		</div>
