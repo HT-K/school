@@ -2,14 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="context" value="<%=request.getContextPath()%>"></c:set>
-
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<title>회원 가입 폼</title>
-</head>
-<body>
+<jsp:include page="../global/header.jsp" />
 	<h1>회원 가입 폼</h1>
 	<div>
 		<form action="${context}/global/main.do" method="get">
@@ -60,5 +53,4 @@
 		<input type="submit" value="홈으로" />
 	</form>
 	</div>
-</body>
-</html>
+<jsp:include page="../global/footer.jsp" />

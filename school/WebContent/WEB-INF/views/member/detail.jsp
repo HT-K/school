@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="context" value="<%=request.getContextPath()%>"></c:set>
-
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title></title>
-</head>
-<body>
+<jsp:include page="../global/header.jsp" />
 	<div>
 		<table border="1">
 			<tr>
@@ -49,5 +42,4 @@
 			<input type="submit" value="로그아웃"/>
 		</form>
 	</div>
-</body>
-</html>
+<jsp:include page="../global/footer.jsp" />
