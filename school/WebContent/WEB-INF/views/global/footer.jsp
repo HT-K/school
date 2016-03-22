@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <footer>
 	<div class="mg_auto">
-		성적관리 프로그램
-
 		<div class="ABA-layout-align">
 			<div class="ABA-container-box-20-5">
 				<div class="ABA-content-box" style="margin-top: 10px;">

@@ -13,7 +13,7 @@ import com.movie.web.global.Command;
 import com.movie.web.global.CommandFactory;
 import com.movie.web.global.Constants;
 
-@WebServlet({"/member/login_form.do", "/member/join_form.do", "/member/login.do", "/member/detail.do", "/member/logout.do"}) // xml과 연결됨, 이렇게 배열 형식으로 서블릿을 지정한다.
+@WebServlet({"/member/login_form.do", "/member/join_form.do", "/member/login.do", "/member/detail.do", "/member/logout.do", "/member/admin.do"}) // xml과 연결됨, 이렇게 배열 형식으로 서블릿을 지정한다.
 public class MemberController extends HttpServlet { // HttpServlet 클래스를 상속받아
 													// 만들어진 클래스.
 	private static final long serialVersionUID = 1L;
@@ -36,6 +36,9 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 				break;	
 			case "logout" :
 				command.setView(command.getDirectory(), "login_form");
+				break;
+			case "admin" :
+				command.setView(command.getDirectory(), "admin");
 				break;
 			default :
 				System.out.println("오류");

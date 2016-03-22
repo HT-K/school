@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="context" value="<%=request.getContextPath()%>"></c:set>
 <jsp:include page="../global/header.jsp" />
+<div class = "mg_auto" style="width: 1000px;">
 	<div>
 		<table border="1">
 			<tr>
@@ -37,9 +36,14 @@
 				<td><input type="date" /></td>
 			</tr>
 		</table>
-		
+		<div>
+			<form action="${context}/grade/my_grade.do">
+				<input type="submit" value="내 성적보기" />
+			</form>
+		</div>
 		<form action="${context}/global/main.do" method="get">
 			<input type="submit" value="로그아웃"/>
 		</form>
 	</div>
+</div>
 <jsp:include page="../global/footer.jsp" />

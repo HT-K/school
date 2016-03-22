@@ -24,13 +24,13 @@ public class HomeController extends HttpServlet {
 			case "main":
 				command.setView(command.getDirectory(), "main");
 				break;
-	
 			default:
 		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(command.getView()); // ~~~.jsp가 파라미터로 넘어감
 		//request.getRequestDispatcher(new Command(result[0], result[1]).getView()); // login_form.jsp에																									// 내용전달
 		dis.forward(request, response); // 페이지 이동, 위에서 지정한 URL (~~~~.jsp)로 페이지를 이동한다 (request와 response 객체를 가지고)
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
