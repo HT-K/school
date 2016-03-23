@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.movie.web.global.Constants;
+import com.movie.web.global.DatabaseFactory;
+import com.movie.web.global.Vendor;
 import com.movie.web.member.MemberBean;
 
 public class GradeDAOImpl implements GradeDAO{
@@ -18,6 +20,10 @@ public class GradeDAOImpl implements GradeDAO{
 	private Statement stmt; // 쿼리 전송 객체
 	private PreparedStatement pstmt; // 쿼리 전송 객체 2
 	private ResultSet rs; // 리턴 값 회수 객체
+	
+	public GradeDAOImpl() {
+		conn = DatabaseFactory.getDatabase(Vendor.ORACLE,Constants.ID, Constants.PASSWORD).getConnection(); // 인스턴스 변수는 필드에서 초기화 하지 않는다. 생성자에서 초기화 해줘라
+	}
 	
 	@Override
 	public void insert(GradeBean gradeBean) {
@@ -30,8 +36,6 @@ public class GradeDAOImpl implements GradeDAO{
 		
 		String query = "INSERT INTO Grade VALUES (?,?,?,?,?,?)";
 		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, hak);
@@ -51,8 +55,6 @@ public class GradeDAOImpl implements GradeDAO{
 		ArrayList<MemberGradeBean> tmpList = new ArrayList<MemberGradeBean>();
 		
 		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM v_Member_Grade");
 
@@ -81,8 +83,6 @@ public class GradeDAOImpl implements GradeDAO{
 	public MemberGradeBean selectGradeByHak(int hak) {
 		MemberGradeBean memGre = new MemberGradeBean();
 		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM v_Member_Grade WHERE hak =" + "'"+hak+"'");
 
@@ -110,8 +110,6 @@ public class GradeDAOImpl implements GradeDAO{
 		ArrayList<MemberGradeBean> tmpList = new ArrayList<MemberGradeBean>();
 		
 		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM v_Member_Grade WHERE name =" + "'"+name+"'");
 
@@ -142,8 +140,6 @@ public class GradeDAOImpl implements GradeDAO{
 		GradeBean grade = new GradeBean();
 		
 		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM Grade WHERE id =" + "'"+id+"'");
 
@@ -168,8 +164,6 @@ public class GradeDAOImpl implements GradeDAO{
 		int count = 0;
 		String sql = "SELECT COUNT(*) AS count FROM v_Member_Grade";
 		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			conn = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			

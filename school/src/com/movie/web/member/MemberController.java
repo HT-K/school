@@ -15,17 +15,15 @@ import com.movie.web.global.Constants;
 
 @WebServlet({"/member/login_form.do", "/member/join_form.do", "/member/login.do", 
 	"/member/detail.do", "/member/logout.do", "/member/admin.do", "/member/join.do", "/member/update_form.do", "/member/update.do"}) // xml과 연결됨, 이렇게 배열 형식으로 서블릿을 지정한다.
-public class MemberController extends HttpServlet { // HttpServlet 클래스를 상속받아
-													// 만들어진 클래스.
+public class MemberController extends HttpServlet { // HttpServlet 클래스를 상속받아 만들어진 클래스.
 	private static final long serialVersionUID = 1L;
-
+	MemberService service = MemberServiceImpl.getService(); // 싱글톤 패턴으로 MemberServiceImpl 객체를 가져온다.
+	
 	// 페이지 이동시에는 doGet (데이터 전달 없이)
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Command command = CommandFactory.getCommand(request, response); // 받아온 URL을 쪼개는 메소드 호출
 		String action = command.getAction(); // URI에서 action만 받아온다.
 		
-		MemberService service = new MemberServiceImpl();
 		MemberBean member = new MemberBean();
 		
 		switch (action) {
@@ -38,7 +36,7 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 				member.setPassword(request.getParameter("password"));
 				member.setName(request.getParameter("name"));
 				member.setAddr(request.getParameter("addr"));
-				member.setId(request.getParameter("birth"));
+				member.setBirth(Integer.parseInt(request.getParameter("birth")));
 				service.join(member);
 				command.setView("global", "main");
 				break;
@@ -75,6 +73,11 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 				request.setAttribute("member", service.detail(request.getParameter("id")));
 				command.setView(command.getDirectory(), "update_form");
 				break;	
+			case "update" :
+				System.out.println("===업데이트 완료===");
+				
+				command.setView(command.getDirectory(), "detail");
+				break;
 			case "logout" :
 				command.setView(command.getDirectory(), "login_form");
 				break;

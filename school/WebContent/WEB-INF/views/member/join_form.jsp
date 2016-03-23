@@ -40,7 +40,7 @@
 					<div class="form-group">
 						<label for="input_name" class="col-sm-4 control-label">생년월일</label>
 					 	<div class="col-sm-4">
-							<input type="date" class="form-control" id="birth" name="birth" placeholder="생년월일을 입력하세요"/>
+							<input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일을 입력하세요"/>
 						</div>
 					</div>
 					<div class="input_button text-center">

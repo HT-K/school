@@ -5,8 +5,15 @@ import java.util.Map.Entry;
 
 public class MemberServiceImpl implements MemberService {
 	HashMap<String, MemberBean> map;
-	MemberDAO dao = new MemberDAOImpl(); // MemberDAO 인터페이스를 구현한 MemberDAOImpl 객체 생성
+	MemberDAO dao = MemberDAOImpl.getInstance(); // 싱글톤패턴으로 생성한 객체를 가져온다 (이렇게 호출하면 생성한 하나의 객체를 가지고 다른 곳에서도 호출할 수 있다.)
+	/*MemberDAO dao = new MemberDAOImpl(); // MemberDAO 인터페이스를 구현한 MemberDAOImpl 객체 생성
+*/	
+	private static MemberService service = new MemberServiceImpl(); // 싱글톤 패턴으로 객체를 사용하기 위함.
 	
+	public static MemberService getService() {
+		return service;
+	}
+
 	public MemberServiceImpl() {
 		map = new HashMap<String, MemberBean>();
 	}
