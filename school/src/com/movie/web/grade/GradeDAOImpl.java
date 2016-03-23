@@ -21,6 +21,12 @@ public class GradeDAOImpl implements GradeDAO{
 	private PreparedStatement pstmt; // 쿼리 전송 객체 2
 	private ResultSet rs; // 리턴 값 회수 객체
 	
+	private static GradeDAO instance = new GradeDAOImpl(); // 싱글톤 패턴을 적용하여 static으로 Deep Copy방식으로 GradeDAOImpl 객체 생성  
+	
+	public static GradeDAO getInstance() { // 이 GradeDAOImpl 클래스가 필요한 곳에서 이 static 메소드를 호출하면 이미 생성되어 있는 GradeDAOImpl 객체를 가져갈 수 있게 된다(1개로 모두 공유해서 사용가능)
+		return instance;
+	}
+
 	public GradeDAOImpl() {
 		conn = DatabaseFactory.getDatabase(Vendor.ORACLE,Constants.ID, Constants.PASSWORD).getConnection(); // 인스턴스 변수는 필드에서 초기화 하지 않는다. 생성자에서 초기화 해줘라
 	}

@@ -6,22 +6,23 @@ import java.util.Map.Entry;
 public class MemberServiceImpl implements MemberService {
 	HashMap<String, MemberBean> map;
 	MemberDAO dao = MemberDAOImpl.getInstance(); // 싱글톤패턴으로 생성한 객체를 가져온다 (이렇게 호출하면 생성한 하나의 객체를 가지고 다른 곳에서도 호출할 수 있다.)
-	/*MemberDAO dao = new MemberDAOImpl(); // MemberDAO 인터페이스를 구현한 MemberDAOImpl 객체 생성
-*/	
-	private static MemberService service = new MemberServiceImpl(); // 싱글톤 패턴으로 객체를 사용하기 위함.
+	private static MemberService instance = new MemberServiceImpl(); // 싱글톤 패턴으로 객체를 사용하기 위함.
 	
-	public static MemberService getService() {
-		return service;
+	/*MemberDAO dao = new MemberDAOImpl(); // MemberDAO 인터페이스를 구현한 MemberDAOImpl 객체 생성, 싱글톤 패턴 전에는 이렇게 썼다.*/	
+	
+	public static MemberService getInstance() {
+		return instance;
 	}
+
 
 	public MemberServiceImpl() {
 		map = new HashMap<String, MemberBean>();
 	}
 	
 	@Override
-	public void join(MemberBean member) {
+	public int join(MemberBean member) {
 		// 회원가입
-		dao.insert(member); // 입력받은 회원양식의 값들을 MemberBean 객체인 member에 set 한 후 이곳으로 가져와서 다시 dao에 넘긴다.
+		return dao.insert(member); // 입력받은 회원양식의 값들을 MemberBean 객체인 member에 set 한 후 이곳으로 가져와서 다시 dao에 넘긴다.
 	}
 
 	@Override
@@ -52,18 +53,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberBean update(MemberBean member) {
+	public int update(MemberBean member) {
 		// 수정
-		map.replace(member.getId(), member);
-		return member;
+		return dao.update(member);
 	}
 
 	@Override
-	public MemberBean remove(String id) {
+	public int remove(String id) {
 		// 삭제
+		return dao.delete(id);
 		
-		MemberBean member = map.remove(id);
-		return member;
+		
+		/*MemberBean member = map.remove(id);
+		return member;*/
 	}
 
 	@Override

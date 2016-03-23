@@ -13,7 +13,7 @@ public class MemberMain {
 			switch (s.nextInt()) {
 			case 1: 
 				System.out.println("아이디, 비번, 이름, 주소, 생년월일 입력");
-				service.join(new MemberBean(s.next(), s.next(), s.next(), s.next(), s.nextInt()));
+				System.out.println("Main 회원 가입 결과: " + service.join(new MemberBean(s.next(), s.next(), s.next(), s.next(), s.nextInt())));
 				break;
 			case 2: 
 				System.out.println("아이디와 비밀번호를 입력하세요.");
@@ -32,12 +32,14 @@ public class MemberMain {
 				//System.out.println("내정보 ====> " + member.toString());
 				break;
 			case 4: 
-				System.out.println("비밀번호, 이름, 주소, 생년월일을 입력하세요");
-				member = service.update(new MemberBean(member.getId(),s.next(),s.next(),s.next(),s.nextInt()));
+				System.out.println("바꾸실 비밀번호와 생년월일을 입력하세요.");
+				System.out.println("Main에서 정보변경 결과 : " + service.update(new MemberBean(member.getId(),s.next(),member.getName(),s.next(),member.getBirth())));
+				//member = service.update(new MemberBean(member.getId(),s.next(),s.next(),s.next(),s.nextInt()));
 				System.out.println("수정된 내 정보 ===> " + member);
 				break;
 			case 5: 
-				member = service.remove(member.getId());
+				System.out.println("탈퇴하고 싶은 회원의 아이디 =" + member.getId());
+				System.out.println(service.remove(member.getId()));
 				break;
 			case 0: 
 				System.out.println("프로그램 종료");

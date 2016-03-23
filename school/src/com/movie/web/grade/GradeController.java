@@ -21,12 +21,13 @@ import com.movie.web.member.MemberServiceImpl;
 @WebServlet("/grade/my_grade.do")
 public class GradeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	GradeService service = GradeServiceImpl.getInstance(); // 싱글톤 패턴을 사용하여 이미 생성된 GradeServiceImpl 객체를 가져와서 사용함
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Command command = CommandFactory.getCommand(request, response);
 		String action = command.getAction();
 		
-		GradeService service = new GradeServiceImpl();
+		/*GradeService service = new GradeServiceImpl(); // 싱글톤 패턴 적용 전에는 이렇게 doGet메소드 안에서 서비스 객체를 생성해서 사용했음 */		
 		GradeBean grade = new GradeBean();
 		
 		switch (action) {
