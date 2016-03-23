@@ -15,8 +15,8 @@ import com.movie.web.global.Constants;
 import com.movie.web.global.DispatcherServlet;
 
 @WebServlet({"/member/login_form.do", "/member/join_form.do", "/member/login.do", 
-	"/member/detail.do", "/member/logout.do", "/member/admin.do", "/member/join.do", 
-	"/member/update_form.do", "/member/update.do", "/member/delete.do"}) // xml과 연결됨, 이렇게 배열 형식으로 서블릿을 지정한다.
+	"/member/detail.do", "/member/logout.do", "/member/join.do", 
+	"/member/update_form.do", "/member/update.do", "/member/delete.do", "/member/admin.do"}) // xml과 연결됨, 이렇게 배열 형식으로 서블릿을 지정한다.
 public class MemberController extends HttpServlet { // HttpServlet 클래스를 상속받아 만들어진 클래스.
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance(); // 싱글톤 패턴으로 MemberServiceImpl 객체를 가져온다.
@@ -27,25 +27,8 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 		MemberBean member = new MemberBean(); // 멤버 빈은 사용자마다 달라야 하므로 doGet 혹은 doPost가 호출될 때 마다 생성되어야 하므로 싱글톤 패턴으로 하면 안된다.
 		
 		switch (command.getAction()) { // URI에서 action만 받아온다.
-			case "login_form" : 
-				break;
-			case "join_form" :
-				break;
-			case "join" :
-				member.setId(request.getParameter("id")); // join_form.jsp에서 받아온 값들을 member 객체에 저장해서 service.join에 보낸다.
-				member.setPassword(request.getParameter("password"));
-				member.setName(request.getParameter("name"));
-				member.setAddr(request.getParameter("addr"));
-				member.setBirth(Integer.parseInt(request.getParameter("birth")));
-				if (service.join(member) == 1) {
-					command.setView(command.getDirectory(), "login_form");
-				} else {
-					command.setView(command.getDirectory(), "join_form");
-				}
-				break;
 			case "login" :
 				System.out.println("로그인");
-				
 				/*if (service.login(request.getParameter("id"), request.getParameter("password")) == null) {
 					System.out.println("로그인 실패");
 					request.setAttribute("message", "비밀번호가 일치하지 않습니다.");
@@ -58,8 +41,9 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 				
 				if (service.isMember(request.getParameter("id"))) { // 입력받은 id 값이 데이터베이스에 있는지 없는지 검사
 					if (service.login(request.getParameter("id"), request.getParameter("password")) == null) { // id는 데이터베이스에 있으나 비번이 다를 경우
-						request.setAttribute("message", "비밀번호가 틀립니다");
-						command.setView(command.getDirectory(), "login_fail");
+						command.setView(command.getDirectory(), "login_form");
+						//request.setAttribute("message", "비밀번호가 틀립니다");
+						//command.setView(command.getDirectory(), "login_fail");
 					} else {
 						request.setAttribute("member", service.login(request.getParameter("id"), request.getParameter("password")));
 						command.setView(command.getDirectory(), "detail"); // id와 비번 둘다 정확할 경우
@@ -69,8 +53,6 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 					command.setView(command.getDirectory(), "login_fail");
 				}
 				break;
-			case "detail" :
-				break;	
 			case "update_form" : 
 				System.out.println("===수정폼으로 이동완료===");
 				request.setAttribute("member", service.detail(request.getParameter("id")));
@@ -87,10 +69,6 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 				System.out.println("업데이트 완료 확인 :" + service.update(member)); // 성공하면 1이 출력되고 실패하면 1이 아닌 값이 출력됨.
 				request.setAttribute("member", member);
 				command.setView(command.getDirectory(), "detail");
-				
-				break;
-			case "logout" :
-				command.setView(command.getDirectory(), "login_form");
 				break;
 			case "delete" :
 				System.out.println("===탈퇴완료===");
@@ -100,6 +78,9 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 				} else {
 					System.out.println("탈퇴 실패");
 				}
+				break;
+			case "logout" :
+				command.setView(command.getDirectory(), "login_form");
 				break;
 			case "admin" :
 				command.setView(command.getDirectory(), "admin");
@@ -136,11 +117,16 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 			member.setAddr(request.getParameter("addr"));
 			member.setBirth(Integer.parseInt(request.getParameter("birth")));
 			
-			System.out.println("업데이트 완료 확인 :" + service.update(member)); // 성공하면 1이 출력되고 실패하면 1이 아닌 값이 출력됨.
-			request.setAttribute("member", member); // 변경된 값을 request 객체를 통해 다음 페이지로 보낸다.
-			command.setView(command.getDirectory(), "detail");
+			if (service.update(member) == 1) {
+				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해 다음 페이지로 보낸다.
+				command.setView(command.getDirectory(), "detail");
+			} else {
+				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해 다음 페이지로 보낸다.
+				command.setView(command.getDirectory(), "update_form");
+			}
 			break;
 		default:
+			command.setView(command.getDirectory(), "main");
 			break;
 		}
 		

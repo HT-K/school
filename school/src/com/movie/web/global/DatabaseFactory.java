@@ -9,10 +9,10 @@ public class DatabaseFactory { // new , 객체를 생성하는 new 키워드를 
 				driver = Constants.ORACLE_DRIVER;
 				url = Constants.ORACLE_URL;
 			break;
-		case MYSQL:
-				
+		case MYSQL:	
 			break;
-		case MSSQL:break;
+		case MSSQL:
+			break;
 
 		default:
 			break;

@@ -2,7 +2,7 @@ package com.movie.web.grade;
 
 public class MemberGradeBean {
 	private String id;
-	private int hak,java,sql,jsp,spring;
+	private int score_seq,java,sql,jsp,spring;
 	private String password, name, addr;
 	private int birth;
 	
@@ -12,11 +12,12 @@ public class MemberGradeBean {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getHak() {
-		return hak;
+
+	public int getScore_seq() {
+		return score_seq;
 	}
-	public void setHak(int hak) {
-		this.hak = hak;
+	public void setScore_seq(int score_seq) {
+		this.score_seq = score_seq;
 	}
 	public int getJava() {
 		return java;
@@ -70,7 +71,7 @@ public class MemberGradeBean {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "개인정보 [학번=" + hak + ", 이름=" + name + ", 아이디=" + id + ", 비밀번호=" + password + ", 생년월일=" + birth + ", 주소=" + addr + ", 자바=" + java + ", SQL=" + sql + ", JSP=" + jsp
+		return "개인정보 [학번=" + score_seq + ", 이름=" + name + ", 아이디=" + id + ", 비밀번호=" + password + ", 생년월일=" + birth + ", 주소=" + addr + ", 자바=" + java + ", SQL=" + sql + ", JSP=" + jsp
 				+ ", 스프링=" + spring + "]" + "\n";
 	}
 }

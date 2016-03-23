@@ -4,8 +4,8 @@
 CREATE OR REPLACE VIEW v_Member_Grade
 AS 
 SELECT 
+	g.score_seq AS score_seq,
  	g.id AS id,
-    g.hak AS hak,
     g.java AS java,
     g.sql AS sql,
     g.jsp AS jsp,
@@ -22,7 +22,7 @@ SELECT * FROM v_Member_Grade;
 SELECT * FROM v_Member_Grade
 WHERE name = '김유신';
 -----------------------------------------------------
-DROP VIEW v_Member_Grade; <!-- 뷰 제거 명령어 -->
+DROP VIEW v_Member_Grade CASCADE CONSTRAINT; <!-- 뷰 제거 명령어 -->
 -----------------------------------------------------
 SELECT COUNT(*) AS count -- 열의 수 구하는 방법, 결과 값을 count 컬럼에다 바로 넣는다.(int 값으로 들어간다) 
 FROM v_Member_Grade;

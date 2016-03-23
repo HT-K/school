@@ -15,7 +15,6 @@ public class CommandFactory { // Factory Pattern , new라는 생성자를 쓰는
 		System.out.println("디렉토리 :" + directory);
 		System.out.println("액션 :" + action);
 		
-		return new Command(directory, action); 
+		return new Command(directory, action); // 이곳에서 Command 객체를 생성한 후 return 시킨다. (팩토리 패턴의 핵심)
 	}
-	
 }

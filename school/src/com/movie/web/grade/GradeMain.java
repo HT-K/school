@@ -15,9 +15,9 @@ public class GradeMain {
 			System.out.println("[메뉴] 1.등록 2.수정 3.삭제 4.조회(전체) 5.조회(이름) 6.조회(학번) 7.회원수 0.종료");
 			switch (scanner.nextInt()) {
 			case 1:
-				System.out.println("ID,학번,자바,SQL,JSP,스프링 점수 입력");
+				System.out.println("score_seq,ID,학번,자바,SQL,JSP,스프링 점수 입력");
 				// GradeBean객체를 생성해서 그 객체에 각각에 맞는 데이터 값을 넣는다. , 값에 따라 객체를 계속 생성해야 하므로 무한루프 안에 있어야함.
-				service.input(new GradeBean(scanner.next(),scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt())); // 데이터를 입력받아 값을 set한 gradeBean객체를 넘긴다. 이 객체는 DAO로 보내지고 마지막에 DB로 보내져야한다.
+				service.input(new GradeBean(scanner.nextInt(),scanner.next(),scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt())); // 데이터를 입력받아 값을 set한 gradeBean객체를 넘긴다. 이 객체는 DAO로 보내지고 마지막에 DB로 보내져야한다.
 				break;
 			case 2:
 				/*System.out.println("수정하려는 성적표의 학번,자바,SQL,JSP,스프링 점수를 입력하세요");

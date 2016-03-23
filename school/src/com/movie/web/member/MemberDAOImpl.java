@@ -66,10 +66,7 @@ public class MemberDAOImpl implements MemberDAO {
 			System.out.println("selectById()에서 에러 발생");
 			e.printStackTrace();
 		}
-		//System.out.println("쿼리 조회 결과 :" + temp.getAddr());
-		
 		return temp;
-		
 	}
 
 	@Override

@@ -40,8 +40,7 @@
 					<div class="input_button text-center">
 						<input type="submit" id="updateButton" class="btn btn-primary" value ="수정 폼으로 이동"/>
 <%-- 						<input type="hidden" id="id" name="id" class="btn btn-primary" value="${member.id}" /> --%>
-						<input type="submit" formaction="${context}/member/delete.do" id="deleteform" class="btn btn-primary" value ="회원탈퇴"/>
-						
+						<input type="submit" formaction="${context}/member/delete.do" id="deleteform" class="btn btn-primary" value ="회원탈퇴"/> <!-- 상단의 form action 경로를 여기서 formaction을 이용해서 바꿔버린다. -->
 					</div>
 				</fieldset>
 			</form>

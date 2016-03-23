@@ -33,8 +33,8 @@ public class GradeDAOImpl implements GradeDAO{
 	
 	@Override
 	public void insert(GradeBean gradeBean) {
+		int score_seq = gradeBean.getScore_seq();
 		String id = gradeBean.getId();
-		int hak = gradeBean.getHak();
 		int java = gradeBean.getJava();
 		int sql = gradeBean.getSql();
 		int jsp = gradeBean.getJsp();
@@ -43,8 +43,8 @@ public class GradeDAOImpl implements GradeDAO{
 		String query = "INSERT INTO Grade VALUES (?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);
-			pstmt.setInt(2, hak);
+			pstmt.setInt(1, score_seq);
+			pstmt.setString(2, id);
 			pstmt.setInt(3, java);
 			pstmt.setInt(4, sql);
 			pstmt.setInt(5, jsp);
@@ -71,7 +71,7 @@ public class GradeDAOImpl implements GradeDAO{
 				temp.setPassword(rs.getString("password"));
 				temp.setAddr(rs.getString("addr"));
 				temp.setBirth(rs.getInt("birth"));
-				temp.setHak(rs.getInt("hak"));
+				temp.setScore_seq(rs.getInt("score_seq"));
 				temp.setJava(rs.getInt("java"));
 				temp.setSql(rs.getInt("sql"));
 				temp.setJsp(rs.getInt("jsp"));
@@ -98,7 +98,7 @@ public class GradeDAOImpl implements GradeDAO{
 				memGre.setPassword(rs.getString("password"));
 				memGre.setAddr(rs.getString("addr"));
 				memGre.setBirth(rs.getInt("birth"));
-				memGre.setHak(rs.getInt("hak"));
+				memGre.setScore_seq(rs.getInt("score_seq"));
 				memGre.setJava(rs.getInt("java"));
 				memGre.setSql(rs.getInt("sql"));
 				memGre.setJsp(rs.getInt("jsp"));
@@ -127,7 +127,7 @@ public class GradeDAOImpl implements GradeDAO{
 				tmpBean.setPassword(rs.getString("password"));
 				tmpBean.setAddr(rs.getString("addr"));
 				tmpBean.setBirth(rs.getInt("birth"));
-				tmpBean.setHak(rs.getInt("hak"));
+				tmpBean.setScore_seq(rs.getInt("score_seq"));
 				tmpBean.setJava(rs.getInt("java"));
 				tmpBean.setSql(rs.getInt("sql"));
 				tmpBean.setJsp(rs.getInt("jsp"));
@@ -150,8 +150,8 @@ public class GradeDAOImpl implements GradeDAO{
 			rs = stmt.executeQuery("SELECT * FROM Grade WHERE id =" + "'"+id+"'");
 
 			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
+				grade.setScore_seq(rs.getInt("score_seq"));
 				grade.setId(rs.getString("id"));
-				grade.setHak(rs.getInt("hak"));
 				grade.setJava(rs.getInt("java"));
 				grade.setSql(rs.getInt("sql"));
 				grade.setJsp(rs.getInt("jsp"));

@@ -24,6 +24,8 @@ VALUES ('kim2','김유신','1','LA',850510);
 
 SELECT * FROM Member;
 
+DROP TABLE Member CASCADE CONSTRAINT;
+
 SELECT * FROM Member WHERE id = 'kim';
 
 SELECT * FROM Member

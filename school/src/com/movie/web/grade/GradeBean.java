@@ -2,17 +2,25 @@ package com.movie.web.grade;
 
 public class GradeBean {
 	private String id;
-	private int hak,java,sql,jsp,spring;
+	private int score_seq,java,sql,jsp,spring;
 	
 	public GradeBean() {} //디폴트 생성자 , 생성자 오버로딩
 	
-	public GradeBean(String id,int hak,int java,int sql,int jsp,int spring) {
+	public GradeBean(int score_seq, String id,int java,int sql,int jsp,int spring) {
+		this.score_seq = score_seq;
 		this.id = id;
-		this.hak = hak;
 		this.java = java;
 		this.sql = sql;
 		this.jsp = jsp;
 		this.spring = spring;
+	}
+	
+	public int getScore_seq() {
+		return score_seq;
+	}
+
+	public void setScore_seq(int score_seq) {
+		this.score_seq = score_seq;
 	}
 	
 	public String getId() {
@@ -21,12 +29,7 @@ public class GradeBean {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getHak() {
-		return hak;
-	}
-	public void setHak(int hak) {
-		this.hak = hak;
-	}
+
 	public int getJava() {
 		return java;
 	}
@@ -54,7 +57,7 @@ public class GradeBean {
 
 	@Override
 	public String toString() {
-		return "성적표 [아이디=" + id + ", 학번=" + hak + ", 자바=" + java + ", SQL=" + sql + ", JSP=" + jsp
+		return "성적표 [시험번호=" + score_seq + ", 아이디=" + id + ", 자바=" + java + ", SQL=" + sql + ", JSP=" + jsp
 				+ ", 스프링=" + spring + "]";
 	}
 } 
