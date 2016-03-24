@@ -26,12 +26,15 @@ public class AdminController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Command command = CommandFactory.getCommand(request, response);
 		MemberGradeBean bean = new MemberGradeBean();
-	
+		
+		System.out.println("command.directory() = " + command.getDirectory());
+		System.out.println("command.action() = " + command.getAction());
+		
 		switch (command.getAction()) {
 		case "admin_list" :
 			listBean = service.getMemberList();
-			request.setAttribute();
-			command.setView(command.getDirectory(), "detail"); // id와 비번 둘다 정확할 경우
+			request.setAttribute("list", listBean);
+			command.setView(command.getDirectory(), "admin_list");
 			break;
 		default:
 			break;

@@ -21,84 +21,82 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance(); // 싱글톤 패턴으로 MemberServiceImpl 객체를 가져온다.
 	
-	// 페이지 이동시에는 doGet (데이터 전달 없이)
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Command command = CommandFactory.getCommand(request, response); // 받아온 URL을 쪼개는 메소드 호출
-		MemberBean member = new MemberBean(); // 멤버 빈은 사용자마다 달라야 하므로 doGet 혹은 doPost가 호출될 때 마다 생성되어야 하므로 싱글톤 패턴으로 하면 안된다.
-		
-		switch (command.getAction()) { // URI에서 action만 받아온다.
-			case "login" :
-				System.out.println("로그인");
-				/*if (service.login(request.getParameter("id"), request.getParameter("password")) == null) {
-					System.out.println("로그인 실패");
-					request.setAttribute("message", "비밀번호가 일치하지 않습니다.");
-					command.setView(command.getDirectory(), "login_form");
-				} else {
-					System.out.println("로그인 성공");
-					request.setAttribute("member", service.login(request.getParameter("id"), request.getParameter("password"))); // request 객체에 MemberBean 객체를 담아서 detail.jsp 페이지로 보낸다.
-					command.setView(command.getDirectory(), "detail"); // id와 비번 둘다 정확할 경우
-				}*/
-				
-				if (service.isMember(request.getParameter("id"))) { // 입력받은 id 값이 데이터베이스에 있는지 없는지 검사
-					if (service.login(request.getParameter("id"), request.getParameter("password")) == null) { // id는 데이터베이스에 있으나 비번이 다를 경우
-						command.setView(command.getDirectory(), "login_form");
-						//request.setAttribute("message", "비밀번호가 틀립니다");
-						//command.setView(command.getDirectory(), "login_fail");
-					} else {
-						request.setAttribute("member", service.login(request.getParameter("id"), request.getParameter("password")));
-						command.setView(command.getDirectory(), "detail"); // id와 비번 둘다 정확할 경우
-					}
-				} else {
-					request.setAttribute("message", "아이디가 없습니다");
-					command.setView(command.getDirectory(), "login_fail");
-				}
-				break;
-			case "update_form" : 
-				System.out.println("===수정폼으로 이동완료===");
-				request.setAttribute("member", service.detail(request.getParameter("id")));
-				command.setView(command.getDirectory(), "update_form");
-				break;	
-			case "update" : // 업데이트 폼에서 업데이트 완료 시 다시 디테일로 가서 변경된 정보를 보여줘야 한다.
-				System.out.println("===업데이트 완료==="); 
-				member.setId(request.getParameter("id")); // 업데이트 폼에서 변경된 정보를 가지고 와서 MemberBean 객체에 저장
-				member.setPassword(request.getParameter("password"));
-				member.setName(request.getParameter("name"));
-				member.setAddr(request.getParameter("addr"));
-				member.setBirth(Integer.parseInt(request.getParameter("birth")));
-				
-				System.out.println("업데이트 완료 확인 :" + service.update(member)); // 성공하면 1이 출력되고 실패하면 1이 아닌 값이 출력됨.
-				request.setAttribute("member", member);
-				command.setView(command.getDirectory(), "detail");
-				break;
-			case "delete" :
-				System.out.println("===탈퇴완료===");
-				if (service.remove(request.getParameter("id")) == 1) {
-					System.out.println("탈퇴성공");
-					command.setView("global", "main");
-				} else {
-					System.out.println("탈퇴 실패");
-				}
-				break;
-			case "logout" :
-				command.setView(command.getDirectory(), "login_form");
-				break;
-			case "admin" :
-				command.setView(command.getDirectory(), "admin");
-				break;
-			default :
-				System.out.println("오류");
-		}
-		
-		DispatcherServlet.goNextPage(request, response, command.getView());
-	}
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Command command = CommandFactory.getCommand(request, response); // 받아온
+																		// URL을
+																		// 쪼개는
+																		// 메소드
+																		// 호출
+		MemberBean member = new MemberBean(); // 멤버 빈은 사용자마다 달라야 하므로 doGet 혹은
+												// doPost가 호출될 때 마다 생성되어야 하므로
+												// 싱글톤 패턴으로 하면 안된다.
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Command command = CommandFactory.getCommand(request, response); // 받아온 URL을 쪼개는 메소드 호출
-		MemberBean member = new MemberBean();
-	
 		switch (command.getAction()) { // URI에서 action만 받아온다.
+		case "update_form":
+			System.out.println("===수정폼으로 이동완료===");
+			request.setAttribute("member", service.detail(request.getParameter("id")));
+			command.setView(command.getDirectory(), "update_form");
+			break;
+		case "delete":
+			System.out.println("===탈퇴완료===");
+			if (service.remove(request.getParameter("id")) == 1) {
+				System.out.println("탈퇴성공");
+				command.setView("global", "main");
+			} else {
+				System.out.println("탈퇴 실패");
+			}
+			break;
+		case "logout":
+			command.setView(command.getDirectory(), "login_form");
+			break;
+		case "admin":
+			command.setView(command.getDirectory(), "admin");
+			break;
+		case "login":
+			System.out.println("로그인");
+			/*
+			 * if (service.login(request.getParameter("id"),
+			 * request.getParameter("password")) == null) { System.out.println(
+			 * "로그인 실패"); request.setAttribute("message", "비밀번호가 일치하지 않습니다.");
+			 * command.setView(command.getDirectory(), "login_form"); } else {
+			 * System.out.println("로그인 성공"); request.setAttribute("member",
+			 * service.login(request.getParameter("id"),
+			 * request.getParameter("password"))); // request 객체에 MemberBean 객체를
+			 * 담아서 detail.jsp 페이지로 보낸다. command.setView(command.getDirectory(),
+			 * "detail"); // id와 비번 둘다 정확할 경우 }
+			 */
+
+			if (service.isMember(request.getParameter("id"))) { // 입력받은 id 값이
+																// 데이터베이스에 있는지
+																// 없는지 검사
+				if (service.login(request.getParameter("id"), request.getParameter("password")) == null) { // id는
+																											// 데이터베이스에
+																											// 있으나
+																											// 비번이
+																											// 다를
+																											// 경우
+					command.setView(command.getDirectory(), "login_form");
+					// request.setAttribute("message", "비밀번호가 틀립니다");
+					// command.setView(command.getDirectory(), "login_fail");
+				} else {
+					request.setAttribute("member",
+							service.login(request.getParameter("id"), request.getParameter("password")));
+					command.setView(command.getDirectory(), "detail"); // id와 비번
+																		// 둘다
+																		// 정확할
+																		// 경우
+				}
+			} else {
+				request.setAttribute("message", "아이디가 없습니다");
+				command.setView(command.getDirectory(), "login_fail");
+			}
+			break;
 		case "join":
-			member.setId(request.getParameter("id")); // join_form.jsp에서 받아온 값들을 member 객체에 저장해서 service.join에 보낸다.
+			member.setId(request.getParameter("id")); // join_form.jsp에서 받아온 값들을
+														// member 객체에 저장해서
+														// service.join에 보낸다.
 			member.setPassword(request.getParameter("password"));
 			member.setName(request.getParameter("name"));
 			member.setAddr(request.getParameter("addr"));
@@ -109,27 +107,29 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 				command.setView(command.getDirectory(), "join_form");
 			}
 			break;
-		case "update" : // 업데이트 폼에서 업데이트 완료 시 다시 디테일로 가서 변경된 정보를 보여줘야 한다.
-			System.out.println("===업데이트 완료==="); 
-			member.setId(request.getParameter("id")); // 업데이트 폼에서 변경된 정보를 가지고 와서 MemberBean 객체에 저장
+		case "update": // 업데이트 폼에서 업데이트 완료 시 다시 디테일로 가서 변경된 정보를 보여줘야 한다.
+			System.out.println("===업데이트 완료===");
+			member.setId(request.getParameter("id")); // 업데이트 폼에서 변경된 정보를 가지고 와서
+														// MemberBean 객체에 저장
 			member.setPassword(request.getParameter("password"));
 			member.setName(request.getParameter("name"));
 			member.setAddr(request.getParameter("addr"));
 			member.setBirth(Integer.parseInt(request.getParameter("birth")));
-			
+
 			if (service.update(member) == 1) {
-				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해 다음 페이지로 보낸다.
+				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해
+														// 다음 페이지로 보낸다.
 				command.setView(command.getDirectory(), "detail");
 			} else {
-				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해 다음 페이지로 보낸다.
+				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해
+														// 다음 페이지로 보낸다.
 				command.setView(command.getDirectory(), "update_form");
 			}
 			break;
 		default:
-			command.setView(command.getDirectory(), "main");
-			break;
+			System.out.println("오류");
 		}
-		
-		DispatcherServlet.goNextPage(request, response, command.getView()); // 다음페이지로 request 객체와 response 객체를 가지고 이동한다. (DAO와 Service는 계속 실행되다 이 Dispatcher라는 배를 통해 jsp 페이지 즉 뷰로 이동하게 되는 것이다.)
+
+		DispatcherServlet.goNextPage(request, response, command.getView());
 	}
 }

@@ -17,7 +17,7 @@
       </tr>
       <c:forEach var="list" items="${list}">
          <tr>
-            <td><input type="text" id="scoreSeq" name="scoreSeq" value="${list.scoreSeq}" readonly="readonly"/></td>
+            <td><input type="text" id="scoreSeq" name="scoreSeq" value="${list.score_seq}" readonly="readonly"/></td>
             <td><input type="text" id="id" name="id" value="${list.id}" readonly="readonly"/></td>
             <td><input type="text" id="name" name="name" value="${list.name}" readonly="readonly"/></td>
             <td><input type="password" id="password" name="password" value="${list.password}" readonly="readonly"/></td>

@@ -41,7 +41,6 @@ public class AdminMain {
 				} else {
 					System.out.println("삽입 실패");
 				}
-				
 				break;
 			default:
 				break;
