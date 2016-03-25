@@ -5,7 +5,7 @@
 			<h2 class="text-center">회원상세정보</h2>
 		</div>
 		<div class="joinCenter row">
-			<form action="${context}/member/update_form.do" name="updateForm" class="form-horizontal">
+			<form>
 				<fieldset class="joinField">
 					<div class="form-group">
 					 	<label for="input_id" class="col-sm-4 control-label">아이디</label>
@@ -37,12 +37,25 @@
 							<input type="text" class="form-control" id="id" name="id" value="${member.birth}" readonly="readonly"/>
 						</div>
 					</div>
-					<div class="input_button text-center">
-						<input type="submit" id="updateButton" class="btn btn-primary" value ="수정 폼으로 이동"/>
-<%-- 						<input type="hidden" id="id" name="id" class="btn btn-primary" value="${member.id}" /> --%>
-						<input type="submit" formaction="${context}/member/delete.do" id="deleteform" class="btn btn-primary" value ="회원탈퇴"/> <!-- 상단의 form action 경로를 여기서 formaction을 이용해서 바꿔버린다. -->
-					</div>
 				</fieldset>
 			</form>
+			<div class="input_button text-center">
+				<button id="updateBtn">수정 폼으로 이동</button>
+				<button id="delBtn">회원탈퇴</button>
+			</div>
 		</div>
 	</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		$('form').addClass('form-horizontal'); // 이게 없으면 화면이 꺠진다.
+		
+		$('#updateBtn').addClass('btn btn-primary').click(function() { // 수정 폼 이동 클릭 시 URL에 id 값을 가지고 넘어간다.
+			location.href = '${context}/member/update_form.do?id=${member.id}';
+		});
+		$('#delBtn').addClass('btn btn-primary').click(function() {
+			location.href = '${context}/member/delete.do?id=${member.id}';
+		});
+	});
+</script>
+</html>

@@ -24,14 +24,8 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Command command = CommandFactory.getCommand(request, response); // 받아온
-																		// URL을
-																		// 쪼개는
-																		// 메소드
-																		// 호출
-		MemberBean member = new MemberBean(); // 멤버 빈은 사용자마다 달라야 하므로 doGet 혹은
-												// doPost가 호출될 때 마다 생성되어야 하므로
-												// 싱글톤 패턴으로 하면 안된다.
+		Command command = CommandFactory.getCommand(request, response); // 받아온 URL을 쪼개는 메소드 호출
+		MemberBean member = new MemberBean(); // 멤버 빈은 사용자마다 달라야 하므로 doGet 혹은 doPost가 호출될 때 마다 생성되어야 하므로 싱글톤 패턴으로 하면 안된다.
 
 		switch (command.getAction()) { // URI에서 action만 받아온다.
 		case "update_form":
@@ -68,21 +62,13 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 			 * "detail"); // id와 비번 둘다 정확할 경우 }
 			 */
 
-			if (service.isMember(request.getParameter("id"))) { // 입력받은 id 값이
-																// 데이터베이스에 있는지
-																// 없는지 검사
-				if (service.login(request.getParameter("id"), request.getParameter("password")) == null) { // id는
-																											// 데이터베이스에
-																											// 있으나
-																											// 비번이
-																											// 다를
-																											// 경우
+			if (service.isMember(request.getParameter("id"))) { // 입력받은 id 값이데이터베이스에 있는지없는지 검사
+				if (service.login(request.getParameter("id"), request.getParameter("password")) == null) { // id는 데이터베이스에있으나비번이다를경우
 					command.setView(command.getDirectory(), "login_form");
 					// request.setAttribute("message", "비밀번호가 틀립니다");
 					// command.setView(command.getDirectory(), "login_fail");
 				} else {
-					request.setAttribute("member",
-							service.login(request.getParameter("id"), request.getParameter("password")));
+					request.setAttribute("member", service.login(request.getParameter("id"), request.getParameter("password")));
 					command.setView(command.getDirectory(), "detail"); // id와 비번
 																		// 둘다
 																		// 정확할

@@ -33,5 +33,19 @@
 					<li><a href="${context}/js/pattern.do">패턴</a></li>
 				</ul>
 			</li>
+			<li role="presentation" class="dropdown" style="margin-left: 100px">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 
+					제이쿼리<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu"> <!-- 리스트 목록을 만들기 위한 ul과 li, ul에 부트스트랩에 이미 들어있는 클래스를 사용해서 이쁘게 나오게 효과를 준다. -->
+					<li><a href="${context}/jquery/attr.do">속성</a></li>
+					<li><a href="${context}/jquery/core.do">코어</a></li>
+					<li><a href="${context}/jquery/event.do">이벤트</a></li>
+					<li><a href="${context}/jquery/selector.do">셀렉터</a></li>
+					<li><a href="${context}/jquery/traversing.do">조회</a></li>
+					<li><a href="${context}/jquery/dom.do">js의 dom을 jquery로</a></li>
+					
+				</ul>
+			</li>
 		</ul>
 	</header>

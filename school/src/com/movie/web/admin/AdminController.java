@@ -15,6 +15,7 @@ import com.movie.web.global.CommandFactory;
 import com.movie.web.global.DispatcherServlet;
 import com.movie.web.grade.GradeBean;
 import com.movie.web.grade.MemberGradeBean;
+import com.movie.web.member.MemberBean;
 
 @WebServlet({"/admin/admin_form.do", "/admin/member_list.do"})
 public class AdminController extends HttpServlet {
@@ -26,16 +27,17 @@ public class AdminController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Command command = CommandFactory.getCommand(request, response);
 		//MemberGradeBean bean = new MemberGradeBean();
-		List<MemberGradeBean> listBean = new ArrayList<MemberGradeBean>(); // 1번메뉴에서 필요
+		List<MemberGradeBean> listBean = new ArrayList<MemberGradeBean>();
+		List<MemberBean> memList = new ArrayList<MemberBean>();
 		
 		System.out.println("command.directory() = " + command.getDirectory());
 		System.out.println("command.action() = " + command.getAction());
 		
 		switch (command.getAction()) {
-		case "member_list" :
+		case "admin_form" :
 			listBean = service.getMemberList();
 			request.setAttribute("list", listBean);
-			command.setView(command.getDirectory(), "member_list");
+			command.setView(command.getDirectory(), "admin_form");
 			break;
 		default:
 			break;

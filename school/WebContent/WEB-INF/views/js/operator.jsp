@@ -12,6 +12,7 @@
 				<li class="dropdown active"><a onclick="opr.gugudan()">구구단 출력</a></li>
 				<li class="dropdown active"><a onclick="opr.sum1to100()">1부터 100까지 합 출력</a></li>
 				<li class="dropdown active"><a onclick="opr.oddSum()">홀수 합 출력</a></li>
+				<li class="dropdown active"><a onclick="liveScript()">라이브 스크립트 호출</a></li>
 
 				<!-- <button onclick="opr.sysout()">배열출력</button> <input type="button" value="배열출력" /> 이것도 왼쪽과 같지만 html5에서는 이 방식을 추천하지 않는다.
 				<button onclick="opr.score()">점수출력</button>
@@ -27,7 +28,10 @@
 	</div>
 </div>
 <script type="text/javascript">
-var opr = { //객체리터럴 방식으로 자바스크립트에서 객체를 생성하는 방식이다.
+function liveScript() { /* 객체지향으로 바뀌지 않은 시절에 쓰던 방식, 이 때는 함수호출이라고한다. (객체지향에서는 메소드 호출이라고 부른다.) */
+	alert('라이브스크립트 시절(객체기반언어가 아닌 시절)');
+}
+var opr = { //객체리터럴 방식으로 자바스크립트에서 객체를 생성하는 방식 중 하나다.
 	sysout : function() {
 		var arr = ['사과', '배', '감', '귤'];
 		for ( var i in arr) {

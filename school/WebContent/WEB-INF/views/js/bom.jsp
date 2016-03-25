@@ -3,7 +3,7 @@
 <div class="container" style="width: 1000px; margin: 0 auto;"> <!-- container -> 부트스트랩에서 이미 선언되어있는 클래스  -->
 	<div>
 		<h3>브라우저 객체 BOM</h3>
-		<h4>Window 객체</h4>
+		<h4>Window 객체</h4> <!-- 팝업 띄울 떄 많이 씀 -->
 		<ul>
 			<li>[1] 대화창
 				<ul>
@@ -23,12 +23,12 @@
 				</ul>
 			</li>
 		</ul>
-		<h4>history 객체</h4>
+		<h4>history 객체</h4> <!-- 앞으로 가기, 뒤로 가기  -->
 		<ul>
 			<li><a href="#" onclick="win.f5()">새로고침</a></li>
 			<li><a href="#" onclick="win.goBack()">이전페이지</a></li>
 		</ul>
-		<h4>location 객체</h4>
+		<h4>location 객체</h4> 
 		<ul>
 			<li><a href="#" onclick="win.href()">홈으로 이동</a></li>
 		</ul>
