@@ -27,7 +27,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-var opr = {
+var opr = { //객체리터럴 방식으로 자바스크립트에서 객체를 생성하는 방식이다.
 	sysout : function() {
 		var arr = ['사과', '배', '감', '귤'];
 		for ( var i in arr) {
