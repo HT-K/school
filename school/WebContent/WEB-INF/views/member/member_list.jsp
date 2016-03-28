@@ -1,30 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-  <table border="1" style="width: 90%; text-align: center">
-      <tr>
-         <td>scoreSeq</td>
-         <td>아이디</td>
-         <td>이름</td>
-         <td>비밀번호</td>
-         <td>주소</td>
-         <td>생년월일</td>
-         <td>자바</td>
-         <td>SQL</td>
-         <td>JSP</td>
-         <td>스프링</td>
-      </tr>
-      <c:forEach var="list" items="${list}">
-         <tr>
-            <td>${list.score_seq}</td>
-            <td>${list.id}</td>
-            <td>${list.name}</td>
-            <td>${list.password}</td>
-            <td>${list.addr}</td>
-            <td>${list.birth}</td>
-            <td>${list.java}</td>
-            <td>${list.sql}</td>
-            <td>${list.jsp}</td>
-            <td>${list.spring}</td>
-         </tr>
-      </c:forEach>
-   </table>
-   </center>
+<table border="1" style="width: 90%; text-align: center">
+	<tr>
+		<th>아이디</th>
+		<th>이름</th>
+		<!-- <th>전공</th>
+		<th>수강과목</th> -->
+		<th>주소</th>
+		<th>생년월일</th>
+	</tr>
+	<c:forEach var="member" items="${list}"> <!-- 컨트롤러에서 보내온 list를 member에 담는다 -->
+		<tr>
+			<td>${member.id}</td>
+			<td>${member.name}</td>
+			<%-- <td>${member.major}</td>
+			<td>${member.subjects}</td> --%>
+			<td>${member.addr}</td>
+			<td>${member.birth}</td>
+		</tr>
+	</c:forEach>
+</table>

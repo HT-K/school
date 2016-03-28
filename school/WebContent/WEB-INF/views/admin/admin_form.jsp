@@ -19,17 +19,17 @@
 <script src="${context}/resources/js/admin.js"></script>
 <script type="text/javascript">
 $(document).ready(function() { // 메인 메소드 같은 존재라고 생각하면 편하다.
-	$('#admin_sidebar').children().first().addClass('dropdown active');
+	$('#admin_sidebar').children().first().addClass('dropdown active'); 
 	$('#admin_sidebar').children().click(function() {
 		$(this).addClass('dropdown active');
 		$(this).siblings().removeClass('dropdown active');
 	});
 	
-	var admin = {
+/* 	var admin = {
 			memberList : function() {
-				//$('#result').load('')
+				$('#result').load('')
 				//$('#result').html($('<jsp:include/>',page="member_list.jsp"));
 			}
-	}
+	} */
 });
 </script>

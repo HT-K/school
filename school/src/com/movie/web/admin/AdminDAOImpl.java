@@ -30,7 +30,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<MemberGradeBean> selectMemberList() {
+	public List<MemberGradeBean> selectMemGraList() {
 		List<MemberGradeBean> temp = new ArrayList<MemberGradeBean>();
 		
 		try {
@@ -75,6 +75,54 @@ public class AdminDAOImpl implements AdminDAO {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public List<MemberBean> selectMemList() { // 학생 목록을 데이터베이스에서 가져온다.
+		List<MemberBean> temp = new ArrayList<MemberBean>();
+		
+		try {
+			stmt = conn.createStatement(); // 이것도 팩토리 패턴이다.
+			rs = stmt.executeQuery("SELECT * FROM Member");
+
+			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
+				MemberBean bean = new MemberBean();
+				bean.setId(rs.getString("id"));
+				bean.setName(rs.getString("name"));
+				bean.setPassword(rs.getString("password"));
+				bean.setAddr(rs.getString("addr"));
+				bean.setBirth(rs.getInt("birth"));
+				temp.add(bean);
+			}
+		} catch (Exception e) {
+			System.out.println("selectMemList() 에서 에러 발생");
+			e.printStackTrace();
+		}
+		return temp;
+	}
+
+	@Override
+	public AdminBean selectAdmin(AdminBean admin) {
+		AdminBean temp = new AdminBean();
+		try {
+			stmt = conn.createStatement(); // 이것도 팩토리 패턴이다.
+			rs = stmt.executeQuery("SELECT * FROM Admin");
+
+			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
+				if (admin.getId().equals(rs.getString("id")) && admin.getPassword().equals(rs.getString("password"))) {
+					temp.setId(rs.getString("id"));
+					temp.setName(rs.getString("name"));
+					temp.setPassword(rs.getString("password"));
+					temp.setAddr(rs.getString("addr"));
+					temp.setBirth(rs.getInt("birth"));
+					temp.setRole(rs.getString("role"));
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("selectAdmin() 에서 에러 발생");
+			e.printStackTrace();
+		}
+		return temp;
 	}
 
 }

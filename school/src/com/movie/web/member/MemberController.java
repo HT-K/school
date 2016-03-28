@@ -68,9 +68,9 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 					// command.setView(command.getDirectory(), "login_fail");
 				} else {
 					System.out.println("=== 로그인 성공 ===");
-					//request.setAttribute("member", service.login(request.getParameter("id"), request.getParameter("password")));
+					request.setAttribute("member", service.login(request.getParameter("id"), request.getParameter("password")));
 					//request.setAttribute("member", member);
-					session.setAttribute("user", member); // 세션 객체에 user라는 이름으로 member 객체를 담는다.
+					//session.setAttribute("user", member); // 세션 객체에 user라는 이름으로 member 객체를 담는다.
 					command.setView(command.getDirectory(), "detail"); // id와 비번 둘다 정확할 경우
 				}
 			} else {
@@ -101,8 +101,8 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 			member.setBirth(Integer.parseInt(request.getParameter("birth")));
 
 			if (service.update(member) == 1) {
-				session.setAttribute("user", service.detail(request.getParameter("id")));
-				//request.setAttribute("member", member); // 변경된 값을 request 객체를 통해  다음 페이지로 보낸다.
+				//session.setAttribute("user", service.detail(request.getParameter("id")));
+				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해  다음 페이지로 보낸다.
 				command.setView(command.getDirectory(), "detail");
 			} else {
 				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해 다음 페이지로 보낸다.
@@ -110,7 +110,7 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 			}
 			break;
 		case "logout":
-			session.invalidate(); // 세션 기본 객체에 저장됐던 속성 목록이 삭제되면서 세션을 종료한다.
+			//session.invalidate(); // 세션 기본 객체에 저장됐던 속성 목록이 삭제되면서 세션을 종료한다.
 			command.setView(command.getDirectory(), "login_form");
 			break;
 		default:
