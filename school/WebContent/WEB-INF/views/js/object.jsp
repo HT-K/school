@@ -11,7 +11,7 @@
 	<div style="margin-top: 30px">
 		<h3>객체 구분</h3>
 		<ol>
-			<li>기본 객체 : String Math, Date, Array</li>
+			<li>기본 객체 : String, Math, Date, Array</li>
 			<li>내장 객체 : 브라우저 객체, 다큐먼트 객체</li>
 			<li>사용자 정의 객체</li>
 		</ol>
@@ -45,7 +45,7 @@
 		<h3>자바스크립트에서 객체 생성방법</h3>
 		<ul>
 			<li>생성자 함수 : var obj = new Object();</li>
-			<li>객체리터럴 : var foo = { var opr : function(){} } </li>
+			<li>객체리터럴 : var foo = { opr : function(){} } </li> <!-- foo.opr()로 호출 가능 -->
 			<li>함수표현식 : var func = function(){}</li>
 		</ul>
 	</div>

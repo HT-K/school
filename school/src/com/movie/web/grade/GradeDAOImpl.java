@@ -66,6 +66,7 @@ public class GradeDAOImpl implements GradeDAO{
 
 			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
 				MemberGradeBean temp = new MemberGradeBean();
+				
 				temp.setId(rs.getString("id"));
 				temp.setName(rs.getString("name"));
 				temp.setPassword(rs.getString("password"));

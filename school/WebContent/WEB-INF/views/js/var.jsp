@@ -12,7 +12,7 @@
 			<li>String (문자형) : var str = 'test' 혹은 "test" 모두 가능</li>
 			<li>boolean (논리형) : var bool = true;</li>
 			<li>null : 널 값</li>
-			<li>undefined : 변수가 선언되었으나 초기화 되지 않음</li> <!-- 자바에서 디폴트는 지역변수이다 (객체지향이지만 인스턴스 변수같은건 없다!) -->
+			<li>undefined : 변수가 선언되었으나 초기화 되지 않음</li> <!-- 자바스크립트에서 디폴트는 지역변수이다 (객체지향이지만 인스턴스 변수같은건 없다!) -->
 			<li>Array(배열) : var arr = ['사과','배','귤']</li>
 		</ul>
 	</div>

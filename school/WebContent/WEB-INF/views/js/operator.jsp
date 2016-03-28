@@ -42,7 +42,7 @@ var opr = { //객체리터럴 방식으로 자바스크립트에서 객체를 �
 	score : function() {
 		var result = ''; // 초기화 시키기
 		var avengers = [];
-		avengers.push({name : '아이언', kor : 90, eng : 90, math : 90});
+		avengers.push({name : '아이언', kor : 90, eng : 90, math : 90}); /* .push() 함수는 해당 배열에 값을 추가하고 싶을 때 사용 */
 		avengers.push({name : '헐크', kor : 80, eng : 80, math : 80});
 		avengers.push({name : '캡아', kor : 70, eng : 70, math : 70});
 		

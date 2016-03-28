@@ -37,7 +37,7 @@
 	</ul>
 </div>
 <script type="text/javascript">
-	var frm = {} // 함수표현식으로 객체 생성
+	var frm = {} // 함수표현식으로 객체 생성 , 이거 쓰자!
 	frm.display = function(id,pw,nation) {
 		alert('아이디는' + id + '이고, 비번은' + pw + '이고,\n', +'송신국가는' + nation +'입니다' );
 	}

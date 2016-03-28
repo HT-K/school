@@ -1,4 +1,4 @@
-package com.movie.web.js;
+package com.movie.web.jquery;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,9 +11,10 @@ import com.movie.web.global.Command;
 import com.movie.web.global.CommandFactory;
 import com.movie.web.global.DispatcherServlet;
 
-@WebServlet({"/js/hello.do", "/js/var.do", "/js/operator.do", "/js/function.do", "/js/object.do", "/js/bom.do",
-	"/js/dom.do", "/js/form.do", "/js/closure.do", "/js/pattern.do"})
-public class jsController extends HttpServlet {
+
+@WebServlet({"/jquery/attr.do","/jquery/core.do","/jquery/event.do","/jquery/selector.do"
+	,"/jquery/traversing.do","/jquery/dom.do"})
+public class jqueryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override

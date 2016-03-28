@@ -7,7 +7,7 @@
 		<ul>
 			<li>[1] 대화창
 				<ul>
-					<li><a href="#" onclick="javascript:win.alert()">경고창</a></li> <!-- javascript:win.alert() 이렇게 써도되고 win.alert() 이렇게 써도된다.  -->
+					<li><a href="#" onclick="javascript:win.alert()">경고창</a></li><!-- #은 해당 페이지라는 의미이다. --> <!-- javascript:win.alert() 이렇게 써도되고 win.alert() 이렇게 써도된다.  -->
 					<li><a href="#" onclick="javascript:win.confirm()">확인창</a></li>
 					<li><a href="#" onclick="javascript:win.prompt()">입력창</a></li>
 				</ul>
@@ -38,7 +38,7 @@
 	var win = {
 			alert : function() {
 				alert('경고창은 메시지만 전달');
-			},
+			}, /* , 쉼표로 함수와 함수 사이를 구분한다. */
 			confirm : function() {
 				confirm('컨펌창은 확인/취소 버튼이 존재한다.');
 			},

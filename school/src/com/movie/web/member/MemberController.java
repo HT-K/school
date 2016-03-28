@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.movie.web.global.Command;
 import com.movie.web.global.CommandFactory;
@@ -26,11 +27,12 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 			throws ServletException, IOException {
 		Command command = CommandFactory.getCommand(request, response); // 받아온 URL을 쪼개는 메소드 호출
 		MemberBean member = new MemberBean(); // 멤버 빈은 사용자마다 달라야 하므로 doGet 혹은 doPost가 호출될 때 마다 생성되어야 하므로 싱글톤 패턴으로 하면 안된다.
-
+		HttpSession session = request.getSession(); // 쉘 로우 카피 방식으로 request 객체를 이용해서 세션 객체를 생성한다.
+		
 		switch (command.getAction()) { // URI에서 action만 받아온다.
 		case "update_form":
 			System.out.println("===수정폼으로 이동완료===");
-			request.setAttribute("member", service.detail(request.getParameter("id")));
+			// request.setAttribute("member", service.detail(request.getParameter("id")));
 			command.setView(command.getDirectory(), "update_form");
 			break;
 		case "delete":
@@ -41,9 +43,6 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 			} else {
 				System.out.println("탈퇴 실패");
 			}
-			break;
-		case "logout":
-			command.setView(command.getDirectory(), "login_form");
 			break;
 		case "admin":
 			command.setView(command.getDirectory(), "admin");
@@ -68,11 +67,11 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 					// request.setAttribute("message", "비밀번호가 틀립니다");
 					// command.setView(command.getDirectory(), "login_fail");
 				} else {
-					request.setAttribute("member", service.login(request.getParameter("id"), request.getParameter("password")));
-					command.setView(command.getDirectory(), "detail"); // id와 비번
-																		// 둘다
-																		// 정확할
-																		// 경우
+					System.out.println("=== 로그인 성공 ===");
+					//request.setAttribute("member", service.login(request.getParameter("id"), request.getParameter("password")));
+					//request.setAttribute("member", member);
+					session.setAttribute("user", member); // 세션 객체에 user라는 이름으로 member 객체를 담는다.
+					command.setView(command.getDirectory(), "detail"); // id와 비번 둘다 정확할 경우
 				}
 			} else {
 				request.setAttribute("message", "아이디가 없습니다");
@@ -95,22 +94,24 @@ public class MemberController extends HttpServlet { // HttpServlet 클래스를 
 			break;
 		case "update": // 업데이트 폼에서 업데이트 완료 시 다시 디테일로 가서 변경된 정보를 보여줘야 한다.
 			System.out.println("===업데이트 완료===");
-			member.setId(request.getParameter("id")); // 업데이트 폼에서 변경된 정보를 가지고 와서
-														// MemberBean 객체에 저장
+			member.setId(request.getParameter("id")); // 업데이트 폼에서 변경된 정보를 가지고 와서 MemberBean 객체에 저장
 			member.setPassword(request.getParameter("password"));
 			member.setName(request.getParameter("name"));
 			member.setAddr(request.getParameter("addr"));
 			member.setBirth(Integer.parseInt(request.getParameter("birth")));
 
 			if (service.update(member) == 1) {
-				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해
-														// 다음 페이지로 보낸다.
+				session.setAttribute("user", service.detail(request.getParameter("id")));
+				//request.setAttribute("member", member); // 변경된 값을 request 객체를 통해  다음 페이지로 보낸다.
 				command.setView(command.getDirectory(), "detail");
 			} else {
-				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해
-														// 다음 페이지로 보낸다.
+				request.setAttribute("member", member); // 변경된 값을 request 객체를 통해 다음 페이지로 보낸다.
 				command.setView(command.getDirectory(), "update_form");
 			}
+			break;
+		case "logout":
+			session.invalidate(); // 세션 기본 객체에 저장됐던 속성 목록이 삭제되면서 세션을 종료한다.
+			command.setView(command.getDirectory(), "login_form");
 			break;
 		default:
 			System.out.println("오류");

@@ -36,7 +36,7 @@ public class GradeMain {
 				System.out.println("조회할 이름 입력");
 				//Vector<GradeBean> gradeVec = service.getGradesById(scanner.next());
 				tmpList = service.getGradesByName(scanner.next());
-				
+
 				System.out.println(tmpList);
 				/*if (gradeVec.size() == 0) { // 리턴 받은 벡터 객체의 사이즈가 0이면 성적 객체를 아무것도 저장하지 못했다는 뜻이다.
 					System.out.println("입력한 이름의 학생이 없습니다.");

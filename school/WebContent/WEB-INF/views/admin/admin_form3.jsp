@@ -7,7 +7,7 @@
 	<tr>
 		<td>전체회원 목록보기</td>
 		<td>
-			<jsp:include page="member_list.jsp"/>
+			<jsp:include page="../member/member_list.jsp"/>
 		</td>
 	</tr>
 	<tr>
@@ -25,7 +25,7 @@
 	<tr>
 		<td>학생 점수 입력</td>
 		<td id="allList" style="display: none">
-			<jsp:include page="member_list.jsp"/>
+			<jsp:include page="../member/member_list.jsp"/>
 		</td>
 	</tr>
 	<tr>

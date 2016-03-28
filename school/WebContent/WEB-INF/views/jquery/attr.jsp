@@ -17,7 +17,7 @@
 		샘플 박스 입니다.
 	</div>
 </div>
-<script src='${context}/resources/js/attr.js'></script> <!-- /* type과 src는 직접 코드를 작성하는 것과 import를 하는 차이를 가진다. */ -->
+<script src='${context}/resources/js/attr.js'></script> <!-- 해당 js 파일을 import하겠다는 의미이다. --> <!-- /* type과 src는 직접 코드를 작성하는 것과 import를 하는 차이를 가진다. */ -->
 <script type="text/javascript">
 $(document).ready(function() { // 자동으로 호출되는 함수 (메인메소드 개념이다.) , 안적어도 되는데 적는게 관례다.
 	alert('콜백 함수가 실행되었습니다.')

@@ -13,7 +13,7 @@
 	<h3>특징</h3>
 	<ul>
 		<li>대소문자 구분</li>
-		<li>${document}.ready(function(){}); 을 통해 무조건 실행하는 환경 설정</li>
+		<li>${document}.ready(function(){}); 을 통해 무조건 실행하는 환경 설정, 자바의 메인메소드와 같다고 보면된다.</li>
 	</ul>
 	<h3>함수</h3>
 	<ul>

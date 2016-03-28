@@ -37,7 +37,7 @@ public class AdminController extends HttpServlet {
 		case "admin_form" :
 			listBean = service.getMemberList();
 			request.setAttribute("list", listBean);
-			command.setView(command.getDirectory(), "admin_form");
+			command.setView(command.getDirectory(), "admin_form3");
 			break;
 		default:
 			break;

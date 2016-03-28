@@ -2,7 +2,7 @@
 <jsp:include page="../global/header.jsp"/>
 <div id="detail">
 		<div class="joinTop">
-			<h2 class="text-center">회원수정정보</h2>
+			<h2 class="text-center">${sessionScope.user.name} 수정 정보</h2>
 		</div>
 		<div class="joinCenter row">
 			<form class="form-horizontal">
@@ -10,7 +10,7 @@
 					<div class="form-group">
 					 	<label for="input_id" class="col-sm-4 control-label">아이디</label>
 					 	<div class="col-sm-4">
-							<input type="text" class="form-control" id="id" name="id" value="${member.id}" readonly="readonly"/>
+							<input type="text" class="form-control" id="id" name="id" value="${sessionScope.user.id}" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
