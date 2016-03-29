@@ -16,32 +16,32 @@
 					<div class="form-group">
 						<label for="input_pw" class="col-sm-4 control-label">비밀번호</label>
 					 	<div class="col-sm-4">
-							<input type="text" class="form-control" id="id" name="id" value="${member.password}" readonly="readonly"/>
+							<input type="text" class="form-control" id="id" name="id" value="${sessionScope.user.password}" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="input_name" class="col-sm-4 control-label">이름</label>
 					 	<div class="col-sm-4">
-							<input type="text" class="form-control" id="id" name="id" value="${member.name}" readonly="readonly"/>
+							<input type="text" class="form-control" id="id" name="id" value="${sessionScope.user.name}" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="input_name" class="col-sm-4 control-label">주소</label>
 					 	<div class="col-sm-4">
-							<input type="text" class="form-control" id="id" name="id" value="${member.addr}" readonly="readonly"/>
+							<input type="text" class="form-control" id="id" name="id" value="${sessionScope.user.addr}" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="input_name" class="col-sm-4 control-label">생년월일</label>
 					 	<div class="col-sm-4">
-							<input type="text" class="form-control" id="id" name="id" value="${member.birth}" readonly="readonly"/>
+							<input type="text" class="form-control" id="id" name="id" value="${sessionScope.user.birth}" readonly="readonly"/>
 						</div>
 					</div>
 				</fieldset>
 			</form>
 			<div class="input_button text-center">
-				<button id="updateBtn">수정 폼으로 이동</button>
-				<button id="delBtn">회원탈퇴</button>
+					<button id="updateBtn">수정 폼으로 이동</button>
+					<button id="delBtn">회원탈퇴</button>
 			</div>
 		</div>
 	</div>
@@ -55,7 +55,8 @@
 			location.href = '${context}/member/update_form.do';// session객체를 이용하면 ${member.id}를 쓸 필요가 없다.
 		});
 		$('#delBtn').addClass('btn btn-primary').click(function() {
-			location.href = '${context}/member/delete.do?id=${member.id}';
+			location.href = '${context}/member/delete.do';
+			
 		});
 	});
 </script>

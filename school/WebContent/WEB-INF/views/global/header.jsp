@@ -19,27 +19,12 @@
 </head>
 
 <body>
-<c:choose>
-	<c:when test="${user.level = 'admin'}">
-		<jsp:include page="../admin/admin_header.jsp"/>
+<c:choose> 
+	<c:when test="${sessionScope.admin.role eq 'admin'}"> 
+		<jsp:include page="../admin/admin_header.jsp" /> 
 	</c:when>
 	<c:otherwise>
-		<jsp:include page="../member/member_header.jsp"/>
+		<jsp:include page="../member/member_header.jsp" />
 	</c:otherwise>
 </c:choose>
 
-<%-- <c:choose>
-	<c:when test="empty sessionScope.user"> <!-- 세션 객체를 검사해서 값이 있으면 when 실행, 없으면 otherwise 실행 -->
-		<jsp:include page="../global/default_header.jsp" />
-	</c:when>
-	<c:otherwise>
-		<c:choose> <!-- if - else 문을 쓰기 위한 태그  -->
-			<c:when test="${user.level eq 'admin'}"> <!-- user.level이 admin이면~  -->
-				<jsp:include page="../admin/admin_header.jsp" /> <!-- 관리자 헤더페이지를 띄워주고 -->
-			</c:when>
-			<c:otherwise>
-				<jsp:include page="../member/member_header.jsp" /> <!-- 유저 레벨이 admin이 아니면 멤버 헤더 페이지를 띄워준다. -->
-			</c:otherwise>
-		</c:choose>
-	</c:otherwise>
-</c:choose> --%>

@@ -8,10 +8,6 @@
 </head>
 <body>
 	<img src="${context}/resources/img/main/index.gif" id="image" alt="" style="margin-left: 33%; margin-top: 15%" />
-	
-	<%-- <form action="${context}/global/main.do">
-		<input type="submit" value="홈으로" />
-	</form> --%>
 	<%-- <a href="${context}/member/login_form.do">로그인 화면 이동</a> <!-- 이 전체를 url이라고 하고 /member/Login_form.do는 uri라고 한다.  --> --%>
 </body>
 <script type="text/javascript"> /* 스크립트 코드는 여기에 써주는게 빠르다! */

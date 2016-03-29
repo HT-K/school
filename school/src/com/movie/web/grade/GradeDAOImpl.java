@@ -1,19 +1,15 @@
 package com.movie.web.grade;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.List;
 
 import com.movie.web.global.Constants;
 import com.movie.web.global.DatabaseFactory;
 import com.movie.web.global.Vendor;
-import com.movie.web.member.MemberBean;
 
 public class GradeDAOImpl implements GradeDAO{
 	private Connection conn; // 오라클 연결 객체
@@ -33,22 +29,20 @@ public class GradeDAOImpl implements GradeDAO{
 	
 	@Override
 	public void insert(GradeBean gradeBean) {
-		int score_seq = gradeBean.getScore_seq();
 		String id = gradeBean.getId();
 		int java = gradeBean.getJava();
 		int sql = gradeBean.getSql();
 		int jsp = gradeBean.getJsp();
 		int spring = gradeBean.getSpring();
 		
-		String query = "INSERT INTO Grade VALUES (?,?,?,?,?,?)";
+		String query = "INSERT INTO Grade VALUES (scoreseq.NEXTVAL,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, score_seq);
-			pstmt.setString(2, id);
-			pstmt.setInt(3, java);
-			pstmt.setInt(4, sql);
-			pstmt.setInt(5, jsp);
-			pstmt.setInt(6, spring);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, java);
+			pstmt.setInt(3, sql);
+			pstmt.setInt(4, jsp);
+			pstmt.setInt(5, spring);
 			pstmt.executeQuery();
 		} catch (Exception e) {
 			System.out.println("insert()에서 에러 발생");
@@ -57,30 +51,25 @@ public class GradeDAOImpl implements GradeDAO{
 	}
 
 	@Override
-	public ArrayList<MemberGradeBean> selectAll() {
-		ArrayList<MemberGradeBean> tmpList = new ArrayList<MemberGradeBean>();
+	public List<GradeBean> selectAll() {
+		List<GradeBean> tmpList = new ArrayList<GradeBean>();
 		
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM v_Member_Grade");
+			rs = stmt.executeQuery("SELECT * FROM Grade");
 
 			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
-				MemberGradeBean temp = new MemberGradeBean();
-				
-				temp.setId(rs.getString("id"));
-				temp.setName(rs.getString("name"));
-				temp.setPassword(rs.getString("password"));
-				temp.setAddr(rs.getString("addr"));
-				temp.setBirth(rs.getInt("birth"));
-				temp.setScore_seq(rs.getInt("score_seq"));
-				temp.setJava(rs.getInt("java"));
-				temp.setSql(rs.getInt("sql"));
-				temp.setJsp(rs.getInt("jsp"));
-				temp.setSpring(rs.getInt("spring"));
-				tmpList.add(temp);
+				GradeBean grade = new GradeBean();
+				grade.setScore_seq(rs.getInt("score_seq"));
+				grade.setId(rs.getString("id"));
+				grade.setJava(rs.getInt("java"));
+				grade.setSql(rs.getInt("sql"));
+				grade.setJsp(rs.getInt("jsp"));
+				grade.setSpring(rs.getInt("spring"));
+				tmpList.add(grade);
 			}
 		} catch (Exception e) {
-			System.out.println("selectMember()에서 에러 발생");
+			System.out.println("selectAll()에서 에러 발생");
 			e.printStackTrace();
 		}
 		return tmpList;

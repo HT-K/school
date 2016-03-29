@@ -29,7 +29,7 @@ public class Command {
 		return view;
 	}
 
-	public void setView(String directory, String action) {
+	public void setView(String directory, String action) { // 이동 할 페이지 내용을 지정하는 함수다.
 		this.view = Constants.VIEWS + "/" + directory + "/" + action + ".jsp";
 	}
 }

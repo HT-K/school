@@ -30,34 +30,29 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<MemberGradeBean> selectMemGraList() {
-		List<MemberGradeBean> temp = new ArrayList<MemberGradeBean>();
-		
+	public AdminBean selectAdmin(AdminBean admin) {
+		AdminBean temp = new AdminBean();
+		String query = "SELECT * FROM Admin WHERE id =? and password=?";
 		try {
-			stmt = conn.createStatement(); // 이것도 팩토리 패턴이다.
-			rs = stmt.executeQuery("SELECT * FROM v_Member_Grade");
-
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, admin.getId());
+			pstmt.setString(2, admin.getPassword());
+			rs = pstmt.executeQuery();
 			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
-				MemberGradeBean bean = new MemberGradeBean();
-				bean.setScore_seq(rs.getInt("score_seq"));
-				bean.setId(rs.getString("id"));
-				bean.setJava(rs.getInt("java"));
-				bean.setSql(rs.getInt("sql"));
-				bean.setJsp(rs.getInt("jsp"));
-				bean.setSpring(rs.getInt("spring"));
-				bean.setName(rs.getString("name"));
-				bean.setPassword(rs.getString("password"));
-				bean.setAddr(rs.getString("addr"));
-				bean.setBirth(rs.getInt("birth"));
-				temp.add(bean);
+				temp.setId(rs.getString("id"));
+				temp.setName(rs.getString("name"));
+				temp.setPassword(rs.getString("password"));
+				temp.setAddr(rs.getString("addr"));
+				temp.setBirth(rs.getInt("birth"));
+				temp.setRole(rs.getString("role"));
 			}
 		} catch (Exception e) {
-			System.out.println("selectMemberList() 에서 에러 발생");
+			System.out.println("selectAdmin() 에서 에러 발생");
 			e.printStackTrace();
 		}
 		return temp;
 	}
-
+	
 	@Override
 	public int insertScore(GradeBean gradeBean) {
 		int result = 0;
@@ -78,51 +73,46 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<MemberBean> selectMemList() { // 학생 목록을 데이터베이스에서 가져온다.
-		List<MemberBean> temp = new ArrayList<MemberBean>();
-		
+	public MemberBean selectMemID(String id) {
+		MemberBean member = new MemberBean();
+		String query = "SELECT * FROM Admin WHERE id=?";
 		try {
-			stmt = conn.createStatement(); // 이것도 팩토리 패턴이다.
-			rs = stmt.executeQuery("SELECT * FROM Member");
-
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
 			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
-				MemberBean bean = new MemberBean();
-				bean.setId(rs.getString("id"));
-				bean.setName(rs.getString("name"));
-				bean.setPassword(rs.getString("password"));
-				bean.setAddr(rs.getString("addr"));
-				bean.setBirth(rs.getInt("birth"));
-				temp.add(bean);
+				member.setId(rs.getString("id"));
+				member.setName(rs.getString("name"));
+				member.setPassword(rs.getString("password"));
+				member.setAddr(rs.getString("addr"));
+				member.setBirth(rs.getInt("birth"));
 			}
 		} catch (Exception e) {
-			System.out.println("selectMemList() 에서 에러 발생");
+			System.out.println("selectMemID() 에서 에러 발생");
 			e.printStackTrace();
 		}
-		return temp;
+		return member;
 	}
 
 	@Override
-	public AdminBean selectAdmin(AdminBean admin) {
-		AdminBean temp = new AdminBean();
+	public MemberBean selectMemName(String name) {
+		MemberBean member = new MemberBean();
+		String query = "SELECT * FROM Admin WHERE name=?";
 		try {
-			stmt = conn.createStatement(); // 이것도 팩토리 패턴이다.
-			rs = stmt.executeQuery("SELECT * FROM Admin");
-
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
 			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
-				if (admin.getId().equals(rs.getString("id")) && admin.getPassword().equals(rs.getString("password"))) {
-					temp.setId(rs.getString("id"));
-					temp.setName(rs.getString("name"));
-					temp.setPassword(rs.getString("password"));
-					temp.setAddr(rs.getString("addr"));
-					temp.setBirth(rs.getInt("birth"));
-					temp.setRole(rs.getString("role"));
-				}
+				member.setId(rs.getString("id"));
+				member.setName(rs.getString("name"));
+				member.setPassword(rs.getString("password"));
+				member.setAddr(rs.getString("addr"));
+				member.setBirth(rs.getInt("birth"));
 			}
 		} catch (Exception e) {
-			System.out.println("selectAdmin() 에서 에러 발생");
+			System.out.println("selectMemID() 에서 에러 발생");
 			e.printStackTrace();
 		}
-		return temp;
+		return member;
 	}
-
 }

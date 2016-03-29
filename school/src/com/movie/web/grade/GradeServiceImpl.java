@@ -1,8 +1,7 @@
 package com.movie.web.grade;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Vector;
+import java.util.List;
 
 public class GradeServiceImpl implements GradeService{
 	// 멤버 필드 (속성을 모아놓은 부분) 
@@ -32,10 +31,9 @@ public class GradeServiceImpl implements GradeService{
 	}
 
 	@Override
-	public ArrayList<MemberGradeBean> getList() { // 서비스에서 syso를 하는게 아니라 Controller로 gradeList를 던져주면 된다!
+	public List<GradeBean> getList() { // 서비스에서 syso를 하는게 아니라 Controller로 gradeList를 던져주면 된다!
 		// R 성적표 리스트 출력
-		gradeList = dao.selectAll();
-		return gradeList;
+		return dao.selectAll();
 	}
 
 	@Override

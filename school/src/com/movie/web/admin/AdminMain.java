@@ -20,7 +20,7 @@ public class AdminMain {
 		while (true) {
 			switch (sc.nextInt()) {
 			case 1:
-				listBean = service.getMemGraList();
+				//listBean = service.getMemGraList();
 				System.out.println("Score_seq \t ID \t JAVA \t SQL \t JSP \t SPRING \t NAME \t PASSWORD \t ADDR \t BIRTH");
 				for (MemberGradeBean temp : listBean) {
 					System.out.print(temp.getScore_seq() + "\t" + temp.getId() + "\t" + temp.getJava() + "\t" + temp.getSql() + "\t" 

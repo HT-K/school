@@ -1,8 +1,7 @@
 package com.movie.web.grade;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * CRUD 인터페이스를 만들 때 이 기준으로 만든다고 생각하면 된다.
@@ -16,7 +15,7 @@ public interface GradeService {
 	// C 성적표 등록 
 	public void input(GradeBean gradeBean); // 추상 메소드
 	// R 성적표 리스트 출력
-	public ArrayList<MemberGradeBean> getList();
+	public List<GradeBean> getList();
 	// R 성적표 조회(학번)
 	public MemberGradeBean getGradeByHak(int hak);
 	// R 성적표 조회(이름)

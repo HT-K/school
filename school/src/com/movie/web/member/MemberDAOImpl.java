@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import com.movie.web.global.Constants;
@@ -29,26 +31,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int insert(MemberBean member) { // 회원가입 양식에서 입력받은 값들을 데이터베이스에 삽입
-		int result = 0;
-		String query = "INSERT INTO Member VALUES (?,?,?,?,?)";
-		try {
-			pstmt = conn.prepareStatement(query); 
-			pstmt.setString(1, member.getId());
-			pstmt.setString(2, member.getName());
-			pstmt.setString(3, member.getPassword());
-			pstmt.setString(4, member.getAddr());
-			pstmt.setInt(5, member.getBirth());
-			result = pstmt.executeUpdate(); // 오라클은 삽입문이 성공하면 (1 row affected)라고 보내준다, 숫자 1을 보내준다!!!
-		} catch (Exception e) {
-			System.out.println("insert()에서 에러 발생");
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	@Override
-	public MemberBean selectById(String id, String password) {
+	public MemberBean login(String id, String password) {
 		MemberBean temp = new MemberBean(); // 데이터베이스에서 내용을 받아와서 저장할 Bean 객체다.
 		
 		try {
@@ -69,6 +52,25 @@ public class MemberDAOImpl implements MemberDAO {
 		return temp;
 	}
 
+	@Override
+	public int insert(MemberBean member) { // 회원가입 양식에서 입력받은 값들을 데이터베이스에 삽입
+		int result = 0;
+		String query = "INSERT INTO Member VALUES (?,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query); 
+			pstmt.setString(1, member.getId());
+			pstmt.setString(2, member.getName());
+			pstmt.setString(3, member.getPassword());
+			pstmt.setString(4, member.getAddr());
+			pstmt.setInt(5, member.getBirth());
+			result = pstmt.executeUpdate(); // 오라클은 삽입문이 성공하면 (1 row affected)라고 보내준다, 숫자 1을 보내준다!!!
+		} catch (Exception e) {
+			System.out.println("insert()에서 에러 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	@Override
 	public MemberBean selectMember(String id) {
 		MemberBean temp = new MemberBean(); // 데이터베이스에서 내용을 받아와서 저장할 Bean 객체다.
@@ -146,5 +148,29 @@ public class MemberDAOImpl implements MemberDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public List<MemberBean> selectAllMem() {
+		List<MemberBean> list = new ArrayList<MemberBean>();
+		
+		try {
+			stmt = conn.createStatement(); // 이것도 팩토리 패턴이다.
+			rs = stmt.executeQuery("SELECT * FROM Member");
+
+			while (rs.next()) { // rs에 요소가 있는 만큼 돌아라
+				MemberBean temp = new MemberBean();
+				temp.setId(rs.getString("id"));
+				temp.setName(rs.getString("name"));
+				temp.setPassword(rs.getString("password"));
+				temp.setAddr(rs.getString("addr"));
+				temp.setBirth(rs.getInt("birth"));
+				list.add(temp);
+			}
+		} catch (Exception e) {
+			System.out.println("selectMemList() 에서 에러 발생");
+			e.printStackTrace();
+		}
+		return list;
 	}
 }
